@@ -1,0 +1,10 @@
+framework module PianoComposer {
+  umbrella header "PianoComposer.h"
+
+  export *
+  module * { export * }
+}
+
+module PianoComposer.Swift {
+    header "PianoComposer-Swift.h"
+}
