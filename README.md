@@ -22,8 +22,8 @@ Add the following lines to your `Podfile`.
 platform :ios, '8.0'
 use_frameworks!
 
-pod 'PianoComposer'
-pod 'PianoOAuth'
+pod 'PianoComposer', '~>1.0.0-alpha2'
+pod 'PianoOAuth', '~>1.0.0-alpha2'
 ```
 
 Then run `pod install`. For details of the installation and usage of CocoaPods, visit [official web site](https://cocoapods.org/).
