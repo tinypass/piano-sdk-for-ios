@@ -6,7 +6,7 @@
 	<dict>
 		<key>Headers/PianoComposer-Swift.h</key>
 		<data>
-		q77wKuqClliPob5iVOCg04dRnSE=
+		M5bDTJ32ssFeYH6YwTyj8nrJCBs=
 		</data>
 		<key>Headers/PianoComposer.h</key>
 		<data>
@@ -14,7 +14,7 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		Zihm1vo+2XGbfpik9wdHibZPE00=
+		9qYBGQcQ5me4HkWW+bc9maK0xMY=
 		</data>
 		<key>Modules/PianoComposer.swiftmodule/arm.swiftdoc</key>
 		<data>
@@ -22,7 +22,7 @@
 		</data>
 		<key>Modules/PianoComposer.swiftmodule/arm.swiftmodule</key>
 		<data>
-		nbQecRu1+kCfF68WjRaaIORt11E=
+		l/0kmyuwK1CM9tT1MDJZPWqnULw=
 		</data>
 		<key>Modules/PianoComposer.swiftmodule/arm64.swiftdoc</key>
 		<data>
@@ -30,7 +30,7 @@
 		</data>
 		<key>Modules/PianoComposer.swiftmodule/arm64.swiftmodule</key>
 		<data>
-		4YfZtULWAYwbQz2x41kntGt4abw=
+		vA+sTwG7vsYFgLVrnOXgunvMPG0=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -43,11 +43,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			q77wKuqClliPob5iVOCg04dRnSE=
+			M5bDTJ32ssFeYH6YwTyj8nrJCBs=
 			</data>
 			<key>hash2</key>
 			<data>
-			iDNbZbitD6Qsw2UbENsP4fwVJs3u7h5NLP7KnbRSFV0=
+			HBbWw6Aw5Td7OsUxO8KKg7BznSeZ3do+PULtXK9TBqQ=
 			</data>
 		</dict>
 		<key>Headers/PianoComposer.h</key>
@@ -76,11 +76,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			nbQecRu1+kCfF68WjRaaIORt11E=
+			l/0kmyuwK1CM9tT1MDJZPWqnULw=
 			</data>
 			<key>hash2</key>
 			<data>
-			Q5bf5Etm5lhqTvOVgB7OjT1ZpoZAolYZjVpk0/ilmYQ=
+			uudotHP6O/ltv1bjFUgMnT+kP8cWxEigqcQl1xl3hBk=
 			</data>
 		</dict>
 		<key>Modules/PianoComposer.swiftmodule/arm64.swiftdoc</key>
@@ -98,11 +98,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			4YfZtULWAYwbQz2x41kntGt4abw=
+			vA+sTwG7vsYFgLVrnOXgunvMPG0=
 			</data>
 			<key>hash2</key>
 			<data>
-			vM7CmItLiRIXx1gbXqSBHPql+ZAI0aYwhn/AQlA5xos=
+			xtu1D/OYcrgl44/UgSGy1H9g6ssFE3gI+dQs9kpm1sk=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>

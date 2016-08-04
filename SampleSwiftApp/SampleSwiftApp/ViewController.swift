@@ -41,7 +41,6 @@ class ViewController: UIViewController {
         composer = PianoComposer(aid: aid)
             .debug(true)
             .userToken("testUserToken")
-            .userProvider("testUserProvider")
             .delegate(self)
             .tag("tag1")
             .tag("tag2")
@@ -106,7 +105,7 @@ extension ViewController: PianoComposerDelegate {
     func showLogin(composer: PianoComposer, event: XpEvent, params: ShowLoginEventParams?) {
         output.text = output.text + "[Composer] ExpId:\(event.eventExecutionContext?.experienceId) showLogin(\(params?.userProvider))\n"
         userProvider = params?.userProvider ?? ""
-        if userProvider == "tinypass_accounts" {
+        if userProvider == PianoComposer.tinypassUserProviderName {
             let vc = PianoOAuthPopupViewController(aid: composer.aid)
             vc.delegate = self
             vc.showPopup()
@@ -144,7 +143,6 @@ extension ViewController: PianoOAuthDelegate {
         
         output.text = output.text + "[Composer] execute with userToken\n"
         composer?.userToken(userToken)
-                .userProvider(userProvider)
                 .execute()
     }
     

@@ -130,8 +130,10 @@ SWIFT_CLASS("_TtC13PianoComposer24PageViewMeterEventParams")
 
 SWIFT_CLASS("_TtC13PianoComposer13PianoComposer")
 @interface PianoComposer : NSObject
-+ (NSString * _Nonnull)tinyPassEndpointUrl;
++ (NSString * _Nonnull)tinypassEndpointUrl;
 + (NSString * _Nonnull)sandboxEndpointUrl;
++ (NSString * _Nonnull)tinypassUserProviderName;
++ (NSString * _Nonnull)janrainUserProviderName;
 @property (nonatomic, weak) id <PianoComposerDelegate> _Nullable delegate;
 @property (nonatomic, readonly, copy) NSString * _Nonnull aid;
 @property (nonatomic, readonly) NSInteger protocolVersion;
@@ -145,7 +147,6 @@ SWIFT_CLASS("_TtC13PianoComposer13PianoComposer")
 @property (nonatomic, copy) NSString * _Nonnull zoneId;
 @property (nonatomic) BOOL debug;
 @property (nonatomic, copy) NSString * _Nonnull userToken;
-@property (nonatomic, copy) NSString * _Nonnull userProvider;
 - (nonnull instancetype)initWithAid:(NSString * _Nonnull)aid endpointUrl:(NSString * _Nonnull)endpointUrl OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)initWithAid:(NSString * _Nonnull)aid;
 - (nonnull instancetype)initWithAid:(NSString * _Nonnull)aid sandbox:(BOOL)sandbox;
@@ -157,7 +158,6 @@ SWIFT_CLASS("_TtC13PianoComposer13PianoComposer")
 - (PianoComposer * _Nonnull)customParams:(CustomParams * _Nonnull)customParams;
 - (PianoComposer * _Nonnull)url:(NSString * _Nonnull)url;
 - (PianoComposer * _Nonnull)userToken:(NSString * _Nonnull)userToken;
-- (PianoComposer * _Nonnull)userProvider:(NSString * _Nonnull)userProvider;
 - (PianoComposer * _Nonnull)referrer:(NSString * _Nonnull)referrer;
 - (PianoComposer * _Nonnull)zoneId:(NSString * _Nonnull)zoneId;
 - (PianoComposer * _Nonnull)debug:(BOOL)debug;

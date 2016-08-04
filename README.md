@@ -22,8 +22,8 @@ Add the following lines to your `Podfile`.
 platform :ios, '8.0'
 use_frameworks!
 
-pod 'PianoComposer', '~>1.0.0-alpha2'
-pod 'PianoOAuth', '~>1.0.0-alpha2'
+pod 'PianoComposer', '~>1.0.0-alpha3'
+pod 'PianoOAuth', '~>1.0.0-alpha3'
 ```
 
 Then run `pod install`. For details of the installation and usage of CocoaPods, visit [official web site](https://cocoapods.org/).
@@ -51,7 +51,6 @@ var composer = PianoComposer(aid: "AID")
         .customVariable("customId", value: 1) // set custom variable
         .customVariable("customArray", value: [1, 2, 3]) // set custom variable
         .userToken("userToken") // set user token
-		.userProvider("userProvider") //set user provider
 ```
 
 #####Composer execution
@@ -100,7 +99,6 @@ composer.referrer = @"http://sitename.com"; // set referrer
 composer.url = @"http://pubsite.com/page1"; // set url
 composer.zoneId = @"Zone1";
 composer.userToken = @"userToken";
-composer.userProvider = @"userProvider";
 composer.customVariables = [[NSDictionary alloc] initWithObjectsAndKeys: @"1", @"customId", [[NSArray alloc] initWithObjects:@"1", @"2",@"3", nil], @"customArray", nil];
 ```
 
