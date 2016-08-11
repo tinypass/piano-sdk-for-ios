@@ -90,6 +90,19 @@ class ViewController: UIViewController {
         vc.view.addSubview(webView)
         vc.view.addSubview(closeButton)
     }
+    
+    func printObject(obj: AnyObject) -> String {
+        let mirrored_object = Mirror(reflecting: obj)
+        var result = "\(obj.dynamicType) = {\n"
+        for (_, attr) in mirrored_object.children.enumerate() {
+            if let property_name = attr.label as String! {
+                result.appendContentsOf("\t\"\(property_name)\" = \"\(attr.value)\",\n")
+            }
+        }
+        
+        result.appendContentsOf("}")
+        return result
+    }
 }
 
 extension ViewController: PianoComposerDelegate {
@@ -99,8 +112,21 @@ extension ViewController: PianoComposerDelegate {
     
     // Experience events
     func experienceExecute(composer: PianoComposer, event: XpEvent, params: ExperienceExecuteEventParams?) {
-        output.text = output.text + "[Composer] ExpId:\(event.eventExecutionContext?.experienceId) experienceExecute(\(params?.user?.uid), \(params?.user?.email), (\(params?.accessList.description))) \n"
+        output.text = output.text + "[Composer] experienceExecute\n"
+        var accessInfo = ""
+        if let user = params?.user {
+            accessInfo.appendContentsOf("\(printObject(user))\n")
+        }
+        
+        if let accessList = params?.accessList {
+            for item in accessList {
+                accessInfo.appendContentsOf("\(printObject(item))\n")
+            }
+        }
+        
+        output.text = output.text + accessInfo;
     }
+
     
     func showLogin(composer: PianoComposer, event: XpEvent, params: ShowLoginEventParams?) {
         output.text = output.text + "[Composer] ExpId:\(event.eventExecutionContext?.experienceId) showLogin(\(params?.userProvider))\n"
