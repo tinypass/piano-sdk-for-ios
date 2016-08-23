@@ -121,16 +121,20 @@ SWIFT_PROTOCOL("_TtP10PianoOAuth18PianoOAuthDelegate_")
 - (void)loginCancelled;
 @end
 
+@class UIWebView;
+@class UIActivityIndicatorView;
 
 SWIFT_CLASS("_TtC10PianoOAuth29PianoOAuthPopupViewController")
 @interface PianoOAuthPopupViewController : BaseOAuthPopupViewController
+@property (nonatomic) BOOL signUpEnabled;
+@property (nonatomic, strong) UIWebView * _Nullable webView;
+@property (nonatomic, strong) UIActivityIndicatorView * _Nullable activityIndicator;
 - (void)viewDidLoad;
 - (void)viewWillAppear:(BOOL)animated;
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)aDecoder OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)initWithAid:(NSString * _Nonnull)aid endpointUrl:(NSString * _Nonnull)endpointUrl OBJC_DESIGNATED_INITIALIZER;
 @end
 
-@class UIWebView;
 @class NSURLRequest;
 @class NSError;
 
