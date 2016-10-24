@@ -22,8 +22,8 @@ Add the following lines to your `Podfile`.
 platform :ios, '8.0'
 use_frameworks!
 
-pod 'PianoComposer', '~>1.0.0-alpha5'
-pod 'PianoOAuth', '~>1.0.0-alpha5'
+pod 'PianoComposer', '~>1.0.0-alpha7'
+pod 'PianoOAuth', '~>1.0.0-alpha7'
 ```
 
 Then run `pod install`. For details of the installation and usage of CocoaPods, visit [official web site](https://cocoapods.org/).
@@ -75,6 +75,7 @@ optional func experienceExecute(composer: PianoComposer, event: XpEvent, params:
 let vc = PianoOAuthPopupViewController(aid: "AID")
 vc.delegate = someDelegate // conform PianoOAuthDelegate protocol
 vc.signUpEnabled = true // makes "sign up" button enabled (default: false)
+vc.widgetType = .Login // widget type (possible values: ".Login", ".Register")
 vc.showPopup()
 ```
 
@@ -127,6 +128,7 @@ composer.customVariables = [[NSDictionary alloc] initWithObjectsAndKeys: @"1", @
 PianoOAuthPopupViewController *vc = [[PianoOAuthPopupViewController alloc] initWithAid:@"AID"];
 vc.delegate = self;
 vc.signUpEnabled = true;
+vc.widgetType = WidgetTypeLogin;
 [vc showPopup];
 ```
 

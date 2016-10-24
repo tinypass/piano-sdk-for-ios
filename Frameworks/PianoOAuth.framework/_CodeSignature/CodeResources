@@ -6,11 +6,11 @@
 	<dict>
 		<key>Assets.car</key>
 		<data>
-		9nrbZaf2xIuELoAksk+KEKlWDNg=
+		TT7jc0aUnqmAudoDbPn1DUiHXvw=
 		</data>
 		<key>Headers/PianoOAuth-Swift.h</key>
 		<data>
-		YNxLONVeYTDFM4++4DC2ETbO88Y=
+		D3yI1BpTp/8vmCuzJmm+2n6GqeY=
 		</data>
 		<key>Headers/PianoOAuth.h</key>
 		<data>
@@ -18,7 +18,7 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		RQtDKw4IMhV9ayHAXLqO/1ki9aI=
+		Yw9XMW1UwQPFh9lFpbxu1rYvQ78=
 		</data>
 		<key>Modules/PianoOAuth.swiftmodule/arm.swiftdoc</key>
 		<data>
@@ -26,7 +26,7 @@
 		</data>
 		<key>Modules/PianoOAuth.swiftmodule/arm.swiftmodule</key>
 		<data>
-		UUU7w3vQSvGXpuSX3grlQM2K6AQ=
+		rf796XSkHDKxL6gUWUWbd+eNj1c=
 		</data>
 		<key>Modules/PianoOAuth.swiftmodule/arm64.swiftdoc</key>
 		<data>
@@ -34,7 +34,7 @@
 		</data>
 		<key>Modules/PianoOAuth.swiftmodule/arm64.swiftmodule</key>
 		<data>
-		KQVkFeYOsVnbTq5VYFQvrOoZKRo=
+		N3ICENKlSzkOJo45XRUENssAYlk=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -47,22 +47,22 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			9nrbZaf2xIuELoAksk+KEKlWDNg=
+			TT7jc0aUnqmAudoDbPn1DUiHXvw=
 			</data>
 			<key>hash2</key>
 			<data>
-			jwLpkSNZ09m43qdE71wIUBl5D5FHITEResQxGgXZq+0=
+			ymenk0Uz5SbD6uHwpUQV3keyRhooflF+4AdFXvQxIDE=
 			</data>
 		</dict>
 		<key>Headers/PianoOAuth-Swift.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			YNxLONVeYTDFM4++4DC2ETbO88Y=
+			D3yI1BpTp/8vmCuzJmm+2n6GqeY=
 			</data>
 			<key>hash2</key>
 			<data>
-			qLQytr4+p7oOriMak3266bXeQwy0+Vq3GDCmJo7OsuM=
+			oCNwzm3QWLFTX2QnM13mqAO4EdxAL3CIi5p8TFVQzdQ=
 			</data>
 		</dict>
 		<key>Headers/PianoOAuth.h</key>
@@ -91,11 +91,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			UUU7w3vQSvGXpuSX3grlQM2K6AQ=
+			rf796XSkHDKxL6gUWUWbd+eNj1c=
 			</data>
 			<key>hash2</key>
 			<data>
-			0MJGG1+l8QYl2LbCfMsrZ+Q5qaETBxp4t7BzEEUmWcw=
+			SrOGc7t3qWOJDygN6Ebct7tkDdja1qdCt12N16aFF/Y=
 			</data>
 		</dict>
 		<key>Modules/PianoOAuth.swiftmodule/arm64.swiftdoc</key>
@@ -113,11 +113,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			KQVkFeYOsVnbTq5VYFQvrOoZKRo=
+			N3ICENKlSzkOJo45XRUENssAYlk=
 			</data>
 			<key>hash2</key>
 			<data>
-			MlR5fqjy7wk2guAtuhPc2aRg2+txP8i3OGIP9oCJzic=
+			LEy3DxPmjuFUgC2U2Pn03rn8zWvSHHhkFpshLKySurs=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>
