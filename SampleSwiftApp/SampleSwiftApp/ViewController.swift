@@ -3,7 +3,6 @@ import PianoComposer
 import PianoOAuth
 
 class ViewController: UIViewController {
-    let aid = "AID"
     
     let blueColor = UIColor(red: 56 / 255.0, green: 120 / 255.0, blue: 212 / 255.0, alpha: 1)
     var userToken: String = ""
@@ -12,7 +11,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var output: UITextView!
     @IBOutlet weak var executeButton: UIButton!
     
-    @IBAction func executeTouchUp(sender: AnyObject) {
+    @IBAction func executeTouchUp(_ sender: AnyObject) {
         onExecute()
     }
     
@@ -21,15 +20,18 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        executeButton.layer.cornerRadius = executeButton.frame.width / 2
         executeButton.layer.borderWidth = 3
-        executeButton.layer.borderColor = blueColor.CGColor
+        executeButton.layer.borderColor = blueColor.cgColor
         
         output.layer.cornerRadius = 3
         output.layer.borderWidth = 1
-        output.layer.borderColor = blueColor.CGColor
+        output.layer.borderColor = blueColor.cgColor
         
         initComposer()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        executeButton.layer.cornerRadius = executeButton.frame.width / 2
     }
     
     func initComposer() {
@@ -38,19 +40,19 @@ class ViewController: UIViewController {
         cp.content["testVar2"] = 15
         cp.user["testArray"] = ["item1", "item2", "item3"]
         
-        composer = PianoComposer(aid: aid)
-            .debug(true)
-            .userToken("testUserToken")
-            .delegate(self)
-            .tag("tag1")
-            .tag("tag2")
-            .tags(["tag3", "tag4"])
-            .zoneId("Zone1")
-            .customParams(cp)
-            .referrer("http://facebook.com")
-            .url("http://news.pubsite.com/news1")
-            .customVariable("customId", value: 1)
-            .customVariable("customArray", value: [1, 2, 3])
+        composer = PianoComposer(aid: PianoSettings.publisherAid)
+            .debug(debug: true)
+            .userToken(userToken: "testUserToken")
+            .delegate(delegate: self)
+            .tag(tag: "tag1")
+            .tag(tag: "tag2")
+            .tags(tagCollection: ["tag3", "tag4"])
+            .zoneId(zoneId: "Zone1")
+            .customParams(customParams: cp)
+            .referrer(referrer: "http://facebook.com")
+            .url(url: "http://news.pubsite.com/news1")
+            .customVariable(name: "customId", value: 1)
+            .customVariable(name: "customArray", value: [1, 2, 3])
    
     }
 
@@ -58,49 +60,49 @@ class ViewController: UIViewController {
         composer?.execute()
     }
     
-    func closeButtonTouchUpInside(sender: UIButton) {
-        if let vc = parentViewController {
-            vc.dismissViewControllerAnimated(true, completion: nil)
+    func closeButtonTouchUpInside(_ sender: UIButton) {
+        if let vc = parent {
+            vc.dismiss(animated: true, completion: nil)
         } else {
-            let window = UIApplication.sharedApplication().keyWindow
+            let window = UIApplication.shared.keyWindow
             if let rootViewController = window?.rootViewController {
-                rootViewController.dismissViewControllerAnimated(true, completion: nil)
+                rootViewController.dismiss(animated: true, completion: nil)
             }
         }
     }
     
     func showPianoSite() {
         let vc = UIViewController()
-        vc.view.backgroundColor = UIColor.whiteColor()
-        self.presentViewController(vc, animated: true) {}
+        vc.view.backgroundColor = UIColor.white
+        self.present(vc, animated: true) {}
         
-        let webView = UIWebView(frame: CGRectMake(0, 40, vc.view.frame.width, vc.view.frame.height - 40))
-        webView.autoresizingMask = [.FlexibleHeight, .FlexibleWidth]
-        webView.loadRequest(NSURLRequest(URL: NSURL(string: "http://piano.io")!))
+        let webView = UIWebView(frame: CGRect(x: 0, y: 40, width: vc.view.frame.width, height: vc.view.frame.height - 40))
+        webView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
+        webView.loadRequest(URLRequest(url: URL(string: "http://piano.io")!))
         
-        let bundle = NSBundle(forClass: self.dynamicType)
-        let closeImage = UIImage(named: "close", inBundle: bundle, compatibleWithTraitCollection: nil)
-        let closeButton = UIButton(type: .System)
-        closeButton.contentMode = UIViewContentMode.ScaleAspectFit
-        closeButton.setImage(closeImage, forState: .Normal)
-        closeButton.frame = CGRectMake(vc.view.frame.width - 44, 10, 44, 44)
-        closeButton.autoresizingMask = [.FlexibleLeftMargin]
-        closeButton.addTarget(self, action: #selector(closeButtonTouchUpInside), forControlEvents: .TouchUpInside)
+        let bundle = Bundle(for: type(of: self))
+        let closeImage = UIImage(named: "close", in: bundle, compatibleWith: nil)
+        let closeButton = UIButton(type: .system)
+        closeButton.contentMode = UIViewContentMode.scaleAspectFit
+        closeButton.setImage(closeImage, for: UIControlState())
+        closeButton.frame = CGRect(x: vc.view.frame.width - 44, y: 10, width: 44, height: 44)
+        closeButton.autoresizingMask = [.flexibleLeftMargin]
+        closeButton.addTarget(self, action: #selector(closeButtonTouchUpInside), for: .touchUpInside)
         
         vc.view.addSubview(webView)
         vc.view.addSubview(closeButton)
     }
     
-    func printObject(obj: AnyObject) -> String {
+    func printObject(_ obj: AnyObject) -> String {
         let mirrored_object = Mirror(reflecting: obj)
-        var result = "\(obj.dynamicType) = {\n"
-        for (_, attr) in mirrored_object.children.enumerate() {
+        var result = "\(type(of: obj)) = {\n"
+        for (_, attr) in mirrored_object.children.enumerated() {
             if let property_name = attr.label as String! {
-                result.appendContentsOf("\t\"\(property_name)\" = \"\(attr.value)\",\n")
+                result.append("\t\"\(property_name)\" = \"\(attr.value)\",\n")
             }
         }
         
-        result.appendContentsOf("}")
+        result.append("}")
         return result
     }
 }
@@ -115,19 +117,18 @@ extension ViewController: PianoComposerDelegate {
         output.text = output.text + "[Composer] experienceExecute\n"
         var accessInfo = ""
         if let user = params?.user {
-            accessInfo.appendContentsOf("\(printObject(user))\n")
+            accessInfo.append("\(printObject(user))\n")
         }
         
         if let accessList = params?.accessList {
             for item in accessList {
-                accessInfo.appendContentsOf("\(printObject(item))\n")
+                accessInfo.append("\(printObject(item))\n")
             }
         }
         
         output.text = output.text + accessInfo;
     }
 
-    
     func showLogin(composer: PianoComposer, event: XpEvent, params: ShowLoginEventParams?) {
         output.text = output.text + "[Composer] ExpId:\(event.eventExecutionContext?.experienceId) showLogin(\(params?.userProvider))\n"
         userProvider = params?.userProvider ?? ""
@@ -168,7 +169,7 @@ extension ViewController: PianoOAuthDelegate {
         userToken = accessToken
         
         output.text = output.text + "[Composer] execute with userToken\n"
-        composer?.userToken(userToken)
+        composer?.userToken(userToken: userToken)
                 .execute()
     }
     

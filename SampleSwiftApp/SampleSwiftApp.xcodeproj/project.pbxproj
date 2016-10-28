@@ -83,14 +83,14 @@
 		0D24ED581D0018F5001BE082 /* SampleSwiftApp */ = {
 			isa = PBXGroup;
 			children = (
+				0DC3C9161D2258B00056A0E1 /* PianoSettings.swift */,
 				0D24ED591D0018F5001BE082 /* AppDelegate.swift */,
+				0DC3C9141D2256120056A0E1 /* MainViewController.swift */,
 				0D24ED5B1D0018F5001BE082 /* ViewController.swift */,
 				0D24ED5D1D0018F5001BE082 /* Main.storyboard */,
-				0D24ED601D0018F5001BE082 /* Assets.xcassets */,
 				0D24ED621D0018F5001BE082 /* LaunchScreen.storyboard */,
+				0D24ED601D0018F5001BE082 /* Assets.xcassets */,
 				0D24ED651D0018F5001BE082 /* Info.plist */,
-				0DC3C9141D2256120056A0E1 /* MainViewController.swift */,
-				0DC3C9161D2258B00056A0E1 /* PianoSettings.swift */,
 			);
 			path = SampleSwiftApp;
 			sourceTree = "<group>";
@@ -129,6 +129,7 @@
 					0D24ED551D0018F5001BE082 = {
 						CreatedOnToolsVersion = 7.3;
 						DevelopmentTeam = 8SVBXV2KL7;
+						LastSwiftMigration = 0800;
 					};
 				};
 			};
@@ -294,6 +295,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.piano.ios.SampleSwiftApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -309,6 +311,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.piano.ios.SampleSwiftApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};

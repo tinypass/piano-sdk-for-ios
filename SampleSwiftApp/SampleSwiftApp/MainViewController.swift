@@ -12,10 +12,10 @@ class MainViewController: UITableViewController, PianoOAuthDelegate {
         super.didReceiveMemoryWarning()
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {        
-        switch indexPath.section {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {        
+        switch (indexPath as NSIndexPath).section {
         case 0:
-            if let vc = storyboard?.instantiateViewControllerWithIdentifier("composer_vc") {
+            if let vc = storyboard?.instantiateViewController(withIdentifier: "composer_vc") {
                 navigationController?.pushViewController(vc, animated: true)
             }
         case 1:
@@ -35,13 +35,13 @@ class MainViewController: UITableViewController, PianoOAuthDelegate {
         showMessage("OAuth", text: "Login cancelled")
     }
     
-    func showMessage(title: String, text: String) {
-        let alert = UIAlertController(title: title, message: text, preferredStyle: UIAlertControllerStyle.Alert)
-        self.presentViewController(alert, animated: true, completion: nil)
+    func showMessage(_ title: String, text: String) {
+        let alert = UIAlertController(title: title, message: text, preferredStyle: UIAlertControllerStyle.alert)
         let duration: Int64 = 2
         
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (duration * Int64(NSEC_PER_SEC))), dispatch_get_main_queue()) {
-            alert.dismissViewControllerAnimated(true, completion: nil)
+        self.present(alert, animated: true, completion: nil)        
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double((duration * Int64(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)) {
+            alert.dismiss(animated: true, completion: nil)
         }
     }
 }

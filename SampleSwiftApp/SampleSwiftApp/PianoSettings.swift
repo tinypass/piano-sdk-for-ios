@@ -1,5 +1,5 @@
 import UIKit
 
-public class PianoSettings: NSObject {
-    public static let publisherAid = "AID"
+open class PianoSettings: NSObject {
+    open static let publisherAid = "AID"
 }
