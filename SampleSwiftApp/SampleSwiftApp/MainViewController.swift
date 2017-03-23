@@ -37,10 +37,10 @@ class MainViewController: UITableViewController, PianoOAuthDelegate {
     
     func showMessage(_ title: String, text: String) {
         let alert = UIAlertController(title: title, message: text, preferredStyle: UIAlertControllerStyle.alert)
-        let duration: Int64 = 2
+        let duration = 2
         
         self.present(alert, animated: true, completion: nil)        
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double((duration * Int64(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(duration)) {
             alert.dismiss(animated: true, completion: nil)
         }
     }

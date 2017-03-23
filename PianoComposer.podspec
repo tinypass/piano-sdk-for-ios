@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "PianoComposer"
-  s.version      = "2.0.0-alpha2"
+  s.version      = "2.0.0-alpha3"
   s.summary      = "Enables iOS apps to use mobile composer by Piano.io"
   s.homepage     = "https://github.com/tinypass/piano-sdk-for-ios"
   s.license      = { :type => "Apache License, Version 2.0", :file => "LICENSE" }

@@ -38,8 +38,8 @@ Add the following lines to your `Podfile`.
 ```
 use_frameworks!
 
-pod 'PianoComposer', '~>2.0.0-alpha2'
-pod 'PianoOAuth', '~>2.0.0-alpha2'
+pod 'PianoComposer', '~>2.0.0-alpha3'
+pod 'PianoOAuth', '~>2.0.0-alpha3'
 ```
 
 ##### Swift 2.2 version (not supported)
