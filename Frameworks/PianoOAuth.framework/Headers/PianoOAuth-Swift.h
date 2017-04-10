@@ -121,12 +121,23 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 
 #pragma clang diagnostic ignored "-Wproperty-attribute-mismatch"
 #pragma clang diagnostic ignored "-Wduplicate-method-arg"
-@class NSCoder;
 @class NSBundle;
+@class NSCoder;
+
+SWIFT_CLASS("_TtC10PianoOAuth23BasePopupViewController")
+@interface BasePopupViewController : UIViewController
+- (void)viewDidLoad;
+- (void)show;
+- (void)close;
+- (void)viewDidLayoutSubviews;
+- (nonnull instancetype)initWithNibName:(NSString * _Nullable)nibNameOrNil bundle:(NSBundle * _Nullable)nibBundleOrNil OBJC_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)aDecoder OBJC_DESIGNATED_INITIALIZER;
+@end
+
 @protocol PianoOAuthDelegate;
 
 SWIFT_CLASS("_TtC10PianoOAuth28BaseOAuthPopupViewController")
-@interface BaseOAuthPopupViewController : UIViewController
+@interface BaseOAuthPopupViewController : BasePopupViewController
 @property (nonatomic, weak) id <PianoOAuthDelegate> _Nullable delegate;
 @property (nonatomic, copy) NSString * _Nonnull endpointUrl;
 @property (nonatomic, copy) NSString * _Nonnull aid;
@@ -134,12 +145,11 @@ SWIFT_CLASS("_TtC10PianoOAuth28BaseOAuthPopupViewController")
 - (nonnull instancetype)initWithAid:(NSString * _Nonnull)aid endpointUrl:(NSString * _Nonnull)endpointUrl OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)initWithAid:(NSString * _Nonnull)aid;
 - (nonnull instancetype)initWithAid:(NSString * _Nonnull)aid sandbox:(BOOL)sandbox;
-- (void)viewDidLoad;
-- (void)viewWillLayoutSubviews;
-- (void)showPopup;
 - (void)close;
+- (void)closeWithoutDelegateCallback;
 - (nonnull instancetype)initWithNibName:(NSString * _Nullable)nibNameOrNil bundle:(NSBundle * _Nullable)nibBundleOrNil SWIFT_UNAVAILABLE;
 @end
+
 
 
 SWIFT_PROTOCOL("_TtP10PianoOAuth18PianoOAuthDelegate_")
@@ -156,8 +166,8 @@ SWIFT_CLASS("_TtC10PianoOAuth29PianoOAuthPopupViewController")
 @interface PianoOAuthPopupViewController : BaseOAuthPopupViewController
 @property (nonatomic) enum WidgetType widgetType;
 @property (nonatomic) BOOL signUpEnabled;
-@property (nonatomic, strong) WKWebView * _Nullable webView;
-@property (nonatomic, strong) UIActivityIndicatorView * _Nullable activityIndicator;
+@property (nonatomic, strong) WKWebView * _Null_unspecified webView;
+@property (nonatomic, strong) UIActivityIndicatorView * _Null_unspecified activityIndicator;
 - (void)viewDidLoad;
 - (void)viewWillLayoutSubviews;
 - (void)viewWillAppear:(BOOL)animated;

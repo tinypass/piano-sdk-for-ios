@@ -115,11 +115,26 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 # define SWIFT_UNAVAILABLE __attribute__((unavailable))
 #endif
 #if defined(__has_feature) && __has_feature(modules)
+@import UIKit;
 @import ObjectiveC;
+@import WebKit;
 #endif
 
 #pragma clang diagnostic ignored "-Wproperty-attribute-mismatch"
 #pragma clang diagnostic ignored "-Wduplicate-method-arg"
+@class NSBundle;
+@class NSCoder;
+
+SWIFT_CLASS("_TtC13PianoComposer23BasePopupViewController")
+@interface BasePopupViewController : UIViewController
+- (void)viewDidLoad;
+- (void)show;
+- (void)close;
+- (void)viewDidLayoutSubviews;
+- (nonnull instancetype)initWithNibName:(NSString * _Nullable)nibNameOrNil bundle:(NSBundle * _Nullable)nibBundleOrNil OBJC_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)aDecoder OBJC_DESIGNATED_INITIALIZER;
+@end
+
 
 SWIFT_CLASS("_TtC13PianoComposer12CustomParams")
 @interface CustomParams : NSObject
@@ -129,6 +144,25 @@ SWIFT_CLASS("_TtC13PianoComposer12CustomParams")
 - (NSDictionary<NSString *, id> * _Nonnull)toDictionary;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
+
+enum DelayType : NSInteger;
+
+SWIFT_CLASS("_TtC13PianoComposer7DelayBy")
+@interface DelayBy : NSObject
+@property (nonatomic, readonly) enum DelayType type;
+@property (nonatomic, readonly) NSInteger value;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
+@end
+
+typedef SWIFT_ENUM(NSInteger, DelayType) {
+  DelayTypeTime = 0,
+  DelayTypeScroll = 1,
+};
+
+typedef SWIFT_ENUM(NSInteger, DisplayMode) {
+  DisplayModeInline = 0,
+  DisplayModeModal = 1,
+};
 
 @class XpAccessItem;
 @class User;
@@ -141,10 +175,32 @@ SWIFT_CLASS("_TtC13PianoComposer28ExperienceExecuteEventParams")
 @end
 
 
+SWIFT_CLASS("_TtC13PianoComposer18FailureEventParams")
+@interface FailureEventParams : NSObject
+@property (nonatomic, readonly, copy) NSString * _Nonnull moduleId;
+@property (nonatomic, readonly, copy) NSString * _Nonnull moduleType;
+@property (nonatomic, readonly, copy) NSString * _Nonnull moduleName;
+@property (nonatomic, readonly, copy) NSString * _Nonnull errorMessage;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
+@end
+
+
+SWIFT_CLASS("_TtC13PianoComposer5Meter")
+@interface Meter : NSObject
+@property (nonatomic, readonly, copy) NSString * _Nonnull meterName;
+@property (nonatomic, readonly) NSInteger views;
+@property (nonatomic, readonly) NSInteger viewsLeft;
+@property (nonatomic, readonly) NSInteger maxViews;
+@property (nonatomic, readonly) NSInteger totalViews;
+- (NSDictionary<NSString *, id> * _Nonnull)toDictionary;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
+@end
+
+
 SWIFT_CLASS("_TtC13PianoComposer24PageViewMeterEventParams")
 @interface PageViewMeterEventParams : NSObject
 @property (nonatomic, readonly, copy) NSString * _Nonnull meterName;
-@property (nonatomic, readonly) NSInteger currentViews;
+@property (nonatomic, readonly) NSInteger views;
 @property (nonatomic, readonly) NSInteger viewsLeft;
 @property (nonatomic, readonly) NSInteger maxViews;
 @property (nonatomic, readonly) NSInteger totalViews;
@@ -176,6 +232,10 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, copy) NSString * _No
 @property (nonatomic, copy) NSString * _Nonnull zoneId;
 @property (nonatomic) BOOL debug;
 @property (nonatomic, copy) NSString * _Nonnull userToken;
+@property (nonatomic, copy) NSString * _Nonnull contentCreated;
+@property (nonatomic, copy) NSString * _Nonnull contentAuthor;
+@property (nonatomic, copy) NSString * _Nonnull contentSection;
+@property (nonatomic, copy) NSString * _Nonnull gaClientId;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 - (nonnull instancetype)initWithAid:(NSString * _Nonnull)aid endpointUrl:(NSString * _Nonnull)endpointUrl OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)initWithAid:(NSString * _Nonnull)aid;
@@ -191,7 +251,11 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, copy) NSString * _No
 - (PianoComposer * _Nonnull)referrerWithReferrer:(NSString * _Nonnull)referrer;
 - (PianoComposer * _Nonnull)zoneIdWithZoneId:(NSString * _Nonnull)zoneId;
 - (PianoComposer * _Nonnull)debugWithDebug:(BOOL)debug;
+- (PianoComposer * _Nonnull)contentCreatedWithContentCreated:(NSString * _Nonnull)contentCreated;
+- (PianoComposer * _Nonnull)contentAuthorWithContentAuthor:(NSString * _Nonnull)contentAuthor;
+- (PianoComposer * _Nonnull)contentSectionWithContentSection:(NSString * _Nonnull)contentSection;
 - (PianoComposer * _Nonnull)delegateWithDelegate:(id <PianoComposerDelegate> _Nullable)delegate;
+- (PianoComposer * _Nonnull)gaClientIdWithGaClientId:(NSString * _Nonnull)gaClientId;
 /**
   Start experiences executing
 */
@@ -200,16 +264,19 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, copy) NSString * _No
 
 @class XpEvent;
 @class ShowLoginEventParams;
+@class ShowTemplateEventParams;
 
 SWIFT_PROTOCOL("_TtP13PianoComposer21PianoComposerDelegate_")
 @protocol PianoComposerDelegate
 @optional
 /**
-  \code
-     Show login event
-
-  \endcode*/
+  Show login event
+*/
 - (void)showLoginWithComposer:(PianoComposer * _Nonnull)composer event:(XpEvent * _Nonnull)event params:(ShowLoginEventParams * _Nullable)params;
+/**
+  Show template event
+*/
+- (void)showTemplateWithComposer:(PianoComposer * _Nonnull)composer event:(XpEvent * _Nonnull)event params:(ShowTemplateEventParams * _Nullable)params;
 /**
   Non site action event
 */
@@ -231,6 +298,10 @@ SWIFT_PROTOCOL("_TtP13PianoComposer21PianoComposerDelegate_")
 */
 - (void)meterExpiredWithComposer:(PianoComposer * _Nonnull)composer event:(XpEvent * _Nonnull)event params:(PageViewMeterEventParams * _Nullable)params;
 /**
+  Exeperience execution failed
+*/
+- (void)experienceExecutionFailedWithComposer:(PianoComposer * _Nonnull)composer event:(XpEvent * _Nonnull)event params:(FailureEventParams * _Nullable)params;
+/**
   Exeperience execute event
 */
 - (void)experienceExecuteWithComposer:(PianoComposer * _Nonnull)composer event:(XpEvent * _Nonnull)event params:(ExperienceExecuteEventParams * _Nullable)params;
@@ -241,10 +312,86 @@ SWIFT_PROTOCOL("_TtP13PianoComposer21PianoComposerDelegate_")
 - (void)composerExecutionCompletedWithComposer:(PianoComposer * _Nonnull)composer;
 @end
 
+@protocol PianoShowTemplateDelegate;
+
+SWIFT_CLASS("_TtC13PianoComposer27PianoShowTemplateController")
+@interface PianoShowTemplateController : NSObject
+@property (nonatomic, weak) id <PianoShowTemplateDelegate> _Nullable delegate;
+@property (nonatomic, strong) ShowTemplateEventParams * _Nonnull params;
+- (nonnull instancetype)initWithParams:(ShowTemplateEventParams * _Nonnull)params OBJC_DESIGNATED_INITIALIZER;
+- (void)show;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
+@end
+
+@class WKUserContentController;
+@class WKScriptMessage;
+
+@interface PianoShowTemplateController (SWIFT_EXTENSION(PianoComposer)) <WKScriptMessageHandler>
+- (void)userContentController:(WKUserContentController * _Nonnull)userContentController didReceiveScriptMessage:(WKScriptMessage * _Nonnull)message;
+@end
+
+@class UIView;
+
+SWIFT_PROTOCOL("_TtP13PianoComposer25PianoShowTemplateDelegate_")
+@protocol PianoShowTemplateDelegate
+- (UIView * _Nullable)findViewBySelectorWithSelector:(NSString * _Nonnull)selector;
+@optional
+- (void)onCustomEventWithEventData:(id _Nonnull)eventData;
+- (void)onCloseWithEventData:(id _Nonnull)eventData;
+- (void)onCloseAndRefreshWithEventData:(id _Nonnull)eventData;
+- (void)onRegisterWithEventData:(id _Nonnull)eventData;
+- (void)onLoginWithEventData:(id _Nonnull)eventData;
+- (void)onLogoutWithEventData:(id _Nonnull)eventData;
+@end
+
+@class WKWebView;
+@class UIActivityIndicatorView;
+
+SWIFT_CLASS("_TtC13PianoComposer36PianoShowTemplatePopupViewController")
+@interface PianoShowTemplatePopupViewController : BasePopupViewController
+@property (nonatomic, strong) WKWebView * _Null_unspecified webView;
+@property (nonatomic, strong) UIActivityIndicatorView * _Null_unspecified activityIndicator;
+@property (nonatomic, strong) ShowTemplateEventParams * _Nonnull showTemplateParams;
+@property (nonatomic, weak) id <PianoShowTemplateDelegate> _Nullable delegate;
+- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)aDecoder OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithParams:(ShowTemplateEventParams * _Nonnull)params OBJC_DESIGNATED_INITIALIZER;
+- (void)viewDidLoad;
+- (void)viewWillLayoutSubviews;
+- (void)viewWillAppear:(BOOL)animated;
+- (void)viewDidAppear:(BOOL)animated;
+- (void)close;
+- (nonnull instancetype)initWithNibName:(NSString * _Nullable)nibNameOrNil bundle:(NSBundle * _Nullable)nibBundleOrNil SWIFT_UNAVAILABLE;
+@end
+
+
+@interface PianoShowTemplatePopupViewController (SWIFT_EXTENSION(PianoComposer)) <WKScriptMessageHandler>
+- (void)userContentController:(WKUserContentController * _Nonnull)userContentController didReceiveScriptMessage:(WKScriptMessage * _Nonnull)message;
+@end
+
+@class WKNavigation;
+@class WKNavigationAction;
+
+@interface PianoShowTemplatePopupViewController (SWIFT_EXTENSION(PianoComposer)) <WKNavigationDelegate>
+- (void)webView:(WKWebView * _Nonnull)webView didFailNavigation:(WKNavigation * _Null_unspecified)navigation withError:(NSError * _Nonnull)error;
+- (void)webView:(WKWebView * _Nonnull)webView decidePolicyForNavigationAction:(WKNavigationAction * _Nonnull)navigationAction decisionHandler:(void (^ _Nonnull)(WKNavigationActionPolicy))decisionHandler;
+- (void)webView:(WKWebView * _Nonnull)webView didFinishNavigation:(WKNavigation * _Null_unspecified)navigation;
+@end
+
 
 SWIFT_CLASS("_TtC13PianoComposer20ShowLoginEventParams")
 @interface ShowLoginEventParams : NSObject
 @property (nonatomic, readonly, copy) NSString * _Nonnull userProvider;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
+@end
+
+
+SWIFT_CLASS("_TtC13PianoComposer23ShowTemplateEventParams")
+@interface ShowTemplateEventParams : NSObject
+@property (nonatomic, readonly, copy) NSString * _Nonnull templateId;
+@property (nonatomic, readonly) enum DisplayMode displayMode;
+@property (nonatomic, readonly, strong) DelayBy * _Nullable delayBy;
+@property (nonatomic, readonly, copy) NSString * _Nonnull containerSelector;
+@property (nonatomic, readonly) BOOL showCloseButton;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 @end
 
@@ -302,6 +449,7 @@ SWIFT_CLASS("_TtC13PianoComposer23XpEventExecutionContext")
 @property (nonatomic, readonly, copy) NSString * _Nonnull region;
 @property (nonatomic, readonly, copy) NSString * _Nonnull countryCode;
 @property (nonatomic, readonly, copy) NSArray<XpAccessItem *> * _Nonnull accessList;
+@property (nonatomic, readonly, copy) NSArray<Meter *> * _Nonnull activeMeters;
 - (nonnull instancetype)initWithDict:(NSDictionary<NSString *, id> * _Nonnull)dict OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 @end
