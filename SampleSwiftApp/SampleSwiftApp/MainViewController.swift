@@ -12,16 +12,16 @@ class MainViewController: UITableViewController, PianoOAuthDelegate {
         super.didReceiveMemoryWarning()
     }
     
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {        
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         switch (indexPath as NSIndexPath).section {
         case 0:
-            if let vc = storyboard?.instantiateViewController(withIdentifier: "composer_vc") {
+            if let vc = storyboard?.instantiateViewControllerWithIdentifier("composer_vc") {
                 navigationController?.pushViewController(vc, animated: true)
             }
         case 1:
             let vc = PianoOAuthPopupViewController(aid: PianoSettings.publisherAid, sandbox: true)
             vc.delegate = self
-            vc.showPopup()
+            vc.show()
         default:
             break
         }
@@ -35,13 +35,13 @@ class MainViewController: UITableViewController, PianoOAuthDelegate {
         showMessage("OAuth", text: "Login cancelled")
     }
     
-    func showMessage(_ title: String, text: String) {
-        let alert = UIAlertController(title: title, message: text, preferredStyle: UIAlertControllerStyle.alert)
+    func showMessage(title: String, text: String) {
+        let alert = UIAlertController(title: title, message: text, preferredStyle: UIAlertControllerStyle.Alert)
+        self.presentViewController(alert, animated: true, completion: nil)
         let duration = 2
         
-        self.present(alert, animated: true, completion: nil)        
-        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(duration)) {
-            alert.dismiss(animated: true, completion: nil)
-        }
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(duration) * Int64(NSEC_PER_SEC)), dispatch_get_main_queue(), {
+            alert.dismissViewControllerAnimated(true, completion: nil)
+        })
     }
 }

@@ -18,36 +18,21 @@ This document details the process of integrating the Piano SDK with your iOS app
 ## Requirements
 - iOS 8.0+
 - Xcode 8.0+
-- Swift 3.0+
+- Swift 2.3+
 
 ## Installation
-
-### Git Submodule
-
-Execute:
-```
-git submodule add https://github.com/tinypass/piano-sdk-for-ios.git
-```	
-in your repository. 
 
 ### [CocoaPods](https://cocoapods.org/)
 
 Add the following lines to your `Podfile`.
 
-##### Swift 3.0 version
+##### Swift 2.3 version  (**[Swift 3.0 version](https://github.com/tinypass/piano-sdk-for-ios/tree/swift2):**)
+
 ```
 use_frameworks!
 
-pod 'PianoComposer', '~>2.0.0-alpha3'
-pod 'PianoOAuth', '~>2.0.0-alpha3'
-```
-
-##### Swift 2.2 version (not supported)
-```
-use_frameworks!
-
-pod 'PianoComposer', '~>1.0.0-alpha7'
-pod 'PianoOAuth', '~>1.0.0-alpha7'
+pod 'PianoComposer', '~>1.0.0'
+pod 'PianoOAuth', '~>1.0.0'
 ```
 Then run `pod install`. For details of the installation and usage of CocoaPods, visit [official web site](https://cocoapods.org/).
 
@@ -63,17 +48,17 @@ import PianoOAuth
 
 ##### Composer initialization
 ```Swift
-var composer = PianoComposer(aid: "AID")
-        .delegate(delegate: self) // conform PianoComposerDelegate protocol
-        .tag(tag: "tag1") // add single tag
-        .tag(tag: "tag2") // add single tag
-        .tags(tagCollection: ["tag3", "tag4"]) //add array of tags
-        .zoneId(zoneId: "Zone1") // set zone
-        .referrer(referrer: "http://sitename.com") // set referrer
-        .url(url: "http://pubsite.com/page1") // set url
-        .customVariable(name: "customId", value: 1) // set custom variable
-        .customVariable(name: "customArray", value: [1, 2, 3]) // set custom variable
-        .userToken(userToken: "userToken") // set user token
+var composer = PianoComposer("AID")
+.delegate(self) // conform PianoComposerDelegate protocol
+.tag("tag1") // add single tag
+.tag("tag2") // add single tag
+.tags(["tag3", "tag4"]) //add array of tags
+.zoneId("Zone1") // set zone
+.referrer("http://sitename.com") // set referrer
+.url("http://pubsite.com/page1") // set url
+.customVariable("customId", value: 1) // set custom variable
+.customVariable("customArray", value: [1, 2, 3]) // set custom variable
+.userToken("userToken") // set user token
 ```
 
 ##### Composer execution
@@ -85,6 +70,7 @@ composer.execute()
 ```Swift 
 func composerExecutionCompleted(composer: PianoComposer)
 optional func showLogin(composer: PianoComposer, event: XpEvent, params: ShowLoginEventParams?)
+optional func showTemplate(composer: PianoComposer, event: XpEvent, params: ShowTemplateEventParams?)
 optional func nonSite(composer: PianoComposer, event: XpEvent)
 optional func userSegmentTrue(composer: PianoComposer, event: XpEvent)
 optional func userSegmentFalse(composer: PianoComposer, event: XpEvent)    
@@ -138,6 +124,7 @@ composer.customVariables = [[NSDictionary alloc] initWithObjectsAndKeys: @"1", @
 - (void)composerExecutionCompleted:(PianoComposer * _Nonnull)composer;
 @optional
 - (void)showLogin:(PianoComposer * _Nonnull)composer event:(XpEvent * _Nonnull)event params:(ShowLoginEventParams * _Nullable)params;
+- (void)showTemplate:(PianoComposer * _Nonnull)composer event:(XpEvent * _Nonnull)event params:(ShowTemplateEventParams * _Nullable)params;
 - (void)nonSite:(PianoComposer * _Nonnull)composer event:(XpEvent * _Nonnull)event;
 - (void)userSegmentTrue:(PianoComposer * _Nonnull)composer event:(XpEvent * _Nonnull)event;
 - (void)userSegmentFalse:(PianoComposer * _Nonnull)composer event:(XpEvent * _Nonnull)event;
