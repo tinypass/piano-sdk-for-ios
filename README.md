@@ -26,7 +26,7 @@ This document details the process of integrating the Piano SDK with your iOS app
 
 Add the following lines to your `Podfile`.
 
-##### Swift 2.3 version  (**[Swift 3.0 version](https://github.com/tinypass/piano-sdk-for-ios/tree/swift2):**)
+##### Swift 2.3 version  ([Swift 3.0 version](https://github.com/tinypass/piano-sdk-for-ios/tree/swift3))
 
 ```
 use_frameworks!
