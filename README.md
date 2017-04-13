@@ -17,8 +17,8 @@ This document details the process of integrating the Piano SDK with your iOS app
 
 ## Requirements
 - iOS 8.0+
-- Xcode 8.0+
-- Swift 3.0+
+- Xcode 8.3+
+- Swift 3.1+
 
 ## Installation
 
@@ -26,12 +26,12 @@ This document details the process of integrating the Piano SDK with your iOS app
 
 Add the following lines to your `Podfile`.
 
-##### Swift 3.0 version ([Swift 2.3 version](https://github.com/tinypass/piano-sdk-for-ios/tree/swift2))
+##### Swift 3.1 version ([Swift 2.3 version](https://github.com/tinypass/piano-sdk-for-ios/tree/swift2))
 ```
 use_frameworks!
 
-pod 'PianoComposer', '~>2.0.0'
-pod 'PianoOAuth', '~>2.0.0'
+pod 'PianoComposer', '~>2.0.1'
+pod 'PianoOAuth', '~>2.0.1'
 ```
 
 Then run `pod install`. For details of the installation and usage of CocoaPods, visit [official web site](https://cocoapods.org/).
@@ -59,6 +59,16 @@ var composer = PianoComposer(aid: "AID")
 .customVariable(name: "customId", value: 1) // set custom variable
 .customVariable(name: "customArray", value: [1, 2, 3]) // set custom variable
 .userToken(userToken: "userToken") // set user token
+```
+
+##### Switch to sandbox
+```Swift
+let composer = PianoComposer(aid: "AID", sandbox: true)
+// or
+let composer = PianoComposer(aid: "AID", endpointUrl: PianoComposer.sandboxEndpointUrl)
+// or
+let composer = PianoComposer(aid: "AID")
+composer.endpointUrl(endpointUrl: PianoComposer.sandboxEndpointUrl)
 ```
 
 ##### Composer execution
