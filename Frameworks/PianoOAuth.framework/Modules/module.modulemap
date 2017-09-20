@@ -7,4 +7,5 @@ framework module PianoOAuth {
 
 module PianoOAuth.Swift {
     header "PianoOAuth-Swift.h"
+    requires objc
 }

@@ -17,7 +17,7 @@ This document details the process of integrating the Piano SDK with your iOS app
 
 ## Requirements
 - iOS 8.0+
-- Xcode 8.3+
+- Xcode 9.0+
 - Swift 3.1+
 
 ## Installation
@@ -30,8 +30,8 @@ Add the following lines to your `Podfile`.
 ```
 use_frameworks!
 
-pod 'PianoComposer', '~>2.0.1'
-pod 'PianoOAuth', '~>2.0.1'
+pod 'PianoComposer', '~>2.0.2'
+pod 'PianoOAuth', '~>2.0.2'
 ```
 
 Then run `pod install`. For details of the installation and usage of CocoaPods, visit [official web site](https://cocoapods.org/).
@@ -56,8 +56,7 @@ var composer = PianoComposer(aid: "AID")
 .zoneId(zoneId: "Zone1") // set zone
 .referrer(referrer: "http://sitename.com") // set referrer
 .url(url: "http://pubsite.com/page1") // set url
-.customVariable(name: "customId", value: 1) // set custom variable
-.customVariable(name: "customArray", value: [1, 2, 3]) // set custom variable
+.customVariable(name: "customId", value: "1") // set custom variable
 .userToken(userToken: "userToken") // set user token
 ```
 
@@ -120,7 +119,7 @@ composer.referrer = @"http://sitename.com"; // set referrer
 composer.url = @"http://pubsite.com/page1"; // set url
 composer.zoneId = @"Zone1";
 composer.userToken = @"userToken";
-composer.customVariables = [[NSDictionary alloc] initWithObjectsAndKeys: @"1", @"customId", [[NSArray alloc] initWithObjects:@"1", @"2",@"3", nil], @"customArray", nil];
+composer.customVariables = [[NSDictionary alloc] initWithObjectsAndKeys: @"1", @"customId", nil];
 ```
 
 ##### Composer execution

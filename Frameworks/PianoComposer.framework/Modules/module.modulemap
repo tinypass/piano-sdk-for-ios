@@ -7,4 +7,5 @@ framework module PianoComposer {
 
 module PianoComposer.Swift {
     header "PianoComposer-Swift.h"
+    requires objc
 }
