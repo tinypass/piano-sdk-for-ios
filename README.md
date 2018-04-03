@@ -17,8 +17,8 @@ This document details the process of integrating the Piano SDK with your iOS app
 
 ## Requirements
 - iOS 8.0+
-- Xcode 9.1+
-- Swift 4.0+
+- Xcode 9.3+
+- Swift 4.1+
 
 ## Installation
 
@@ -26,12 +26,12 @@ This document details the process of integrating the Piano SDK with your iOS app
 
 Add the following lines to your `Podfile`.
 
-##### Swift 4.0 version ([Swift 2.3 version](https://github.com/tinypass/piano-sdk-for-ios/tree/swift2))
+##### Swift 4.1 version
 ```
 use_frameworks!
 
-pod 'PianoComposer', '~>2.0.3'
-pod 'PianoOAuth', '~>2.0.3'
+pod 'PianoComposer', '~>2.0.4'
+pod 'PianoOAuth', '~>2.0.4'
 ```
 
 Then run `pod install`. For details of the installation and usage of CocoaPods, visit [official web site](https://cocoapods.org/).
