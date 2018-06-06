@@ -30,8 +30,8 @@ Add the following lines to your `Podfile`.
 ```
 use_frameworks!
 
-pod 'PianoComposer', '~>2.0.4'
-pod 'PianoOAuth', '~>2.0.4'
+pod 'PianoComposer', '~>2.0.5'
+pod 'PianoOAuth', '~>2.0.5'
 ```
 
 Then run `pod install`. For details of the installation and usage of CocoaPods, visit [official web site](https://cocoapods.org/).
@@ -76,8 +76,11 @@ composer.execute()
 ``` 
 
 ##### PianoComposerDelegate protocol
-```Swift 
-func composerExecutionCompleted(composer: PianoComposer)
+```Swift
+// Client actions
+optional func composerExecutionCompleted(composer: PianoComposer)
+
+// Composer actions from server 
 optional func showLogin(composer: PianoComposer, event: XpEvent, params: ShowLoginEventParams?)
 optional func showTemplate(composer: PianoComposer, event: XpEvent, params: ShowTemplateEventParams?)
 optional func nonSite(composer: PianoComposer, event: XpEvent)
@@ -90,7 +93,10 @@ optional func experienceExecute(composer: PianoComposer, event: XpEvent, params:
 
 ##### OAuth usage
 ```Swift
-let vc = PianoOAuthPopupViewController(aid: "AID")
+let vc = PianoOAuthPopupViewController(aid: "AID") // for tinypass accounts user provider
+// or
+let vc = PianoIdOAuthPopupViewController(aid: "AID") // for piano id user provider
+...
 vc.delegate = someDelegate // conform PianoOAuthDelegate protocol
 vc.signUpEnabled = true // makes "sign up" button enabled (default: false)
 vc.widgetType = .login // widget type (possible values: ".login", ".register")
@@ -129,9 +135,9 @@ composer.customVariables = [[NSDictionary alloc] initWithObjectsAndKeys: @"1", @
 
 ##### PianoComposerDelegate protocol
 ```objective-c
-@required
-- (void)composerExecutionCompleted:(PianoComposer * _Nonnull)composer;
+
 @optional
+- (void)composerExecutionCompleted:(PianoComposer * _Nonnull)composer;
 - (void)showLogin:(PianoComposer * _Nonnull)composer event:(XpEvent * _Nonnull)event params:(ShowLoginEventParams * _Nullable)params;
 - (void)showTemplate:(PianoComposer * _Nonnull)composer event:(XpEvent * _Nonnull)event params:(ShowTemplateEventParams * _Nullable)params;
 - (void)nonSite:(PianoComposer * _Nonnull)composer event:(XpEvent * _Nonnull)event;
