@@ -7,7 +7,7 @@ Piano SDK includes embedded dynamic frameworks written in Swift.
 [![Platform](https://img.shields.io/cocoapods/p/PianoComposer.svg?style=flat)](http://cocoapods.org/pods/PianoComposer)
 [![License](https://img.shields.io/cocoapods/l/PianoComposer.svg?style=flat)](http://cocoapods.org/pods/PianoComposer)
 
-- **[PianoOAuth](http://cocoapods.org/pods/PianoOAuth):** component for authentication tinypass accounts). Frameworks can be used for development iOS applications on Objective C and Swift.
+- **[PianoOAuth](http://cocoapods.org/pods/PianoOAuth):** component for authentication tinypass accounts). Frameworks can be used for development iOS applications on Objective-c and Swift.
 
 [![Version](https://img.shields.io/cocoapods/v/PianoOAuth.svg?style=flat)](http://cocoapods.org/pods/PianoOAuth)
 [![Platform](https://img.shields.io/cocoapods/p/PianoOAuth.svg?style=flat)](http://cocoapods.org/pods/PianoOAuth)
@@ -29,43 +29,46 @@ Add the following lines to your `Podfile`.
 ```
 use_frameworks!
 
-pod 'PianoComposer', '~>2.2.0'
-pod 'PianoOAuth', '~>2.2.0'
+pod 'PianoComposer', '~>2.3.0'
+pod 'PianoOAuth', '~>2.3.0'
 ```
 
 Then run `pod install`. For details of the installation and usage of CocoaPods, visit [official web site](https://cocoapods.org/).
 
 
-## Standard Usage
+## PianoComposer Usage
 
-### Swift
 ##### Imports
-```Swift
+```swift
+// swift
 import PianoComposer
-import PianoOAuth
+```
+```
+// objective-c
+#import "PianoComposer/PianoComposer-Swift.h"
 ```
 
-##### Composer initialization
-```Swift
-var composer = PianoComposer(aid: "AID")
-.delegate(delegate: self) // conform PianoComposerDelegate protocol
-.tag(tag: "tag1") // add single tag
-.tag(tag: "tag2") // add single tag
-.tags(tagCollection: ["tag3", "tag4"]) //add array of tags
-.zoneId(zoneId: "Zone1") // set zone
-.referrer(referrer: "http://sitename.com") // set referrer
-.url(url: "http://pubsite.com/page1") // set url
+##### Usage
+```swift
+var composer = PianoComposer(aid: "<PUBLISHER_AID>")
+.delegate(self) // conform PianoComposerDelegate protocol
+.tag("tag1") // add single tag
+.tag("tag2") // add single tag
+.tags(["tag3", "tag4"]) //add array of tags
+.zoneId("Zone1") // set zone
+.referrer("http://sitename.com") // set referrer
+.url("http://pubsite.com/page1") // set url
 .customVariable(name: "customId", value: "1") // set custom variable
-.userToken(userToken: "userToken") // set user token
+.userToken("userToken") // set user token
 ```
 
 ##### Switch to sandbox
-```Swift
-let composer = PianoComposer(aid: "AID", sandbox: true)
+```swift
+let composer = PianoComposer(aid: "<PUBLISHER_AID>", sandbox: true)
 // or
-let composer = PianoComposer(aid: "AID", endpointUrl: PianoComposer.sandboxEndpointUrl)
+let composer = PianoComposer(aid: "<PUBLISHER_AID>", endpointUrl: PianoComposer.sandboxEndpointUrl)
 // or
-let composer = PianoComposer(aid: "AID")
+let composer = PianoComposer(aid: "<PUBLISHER_AID>")
 composer.endpointUrl(endpointUrl: PianoComposer.sandboxEndpointUrl)
 ```
 
@@ -75,7 +78,7 @@ composer.execute()
 ``` 
 
 ##### PianoComposerDelegate protocol
-```Swift
+```swift
 // Client actions
 optional func composerExecutionCompleted(composer: PianoComposer)
 
@@ -90,11 +93,54 @@ optional func meterExpired(composer: PianoComposer, event: XpEvent, params: Page
 optional func experienceExecute(composer: PianoComposer, event: XpEvent, params: ExperienceExecuteEventParams?)
 ```
 
-##### OAuth usage
+
+##### PianoOAuthDelegate protocol
+```swift
+func loginSucceeded(accessToken: String)
+func loginCancelled() 
+```
+
+
+## PianoOAuth Usage
+
+#### Imports
+```swift
+// swift
+import PianoOAuth
+```
+```
+// objective-c
+#import "PianoOAuth/PianoOAuth-Swift.h"
+
+```
+
+#### Tinypass accounts user provider
+##### Usage
 ```Swift
-let vc = PianoOAuthPopupViewController(aid: "AID") // for tinypass accounts user provider
-// or
-let vc = PianoIdOAuthPopupViewController(aid: "AID") // for piano id user provider
+let vc = PianoOAuthPopupViewController(aid: "<PUBLISHER_AID>") // for tinypass accounts user provider
+...
+vc.delegate = someDelegate // conform PianoOAuthDelegate protocol
+vc.signUpEnabled = true // makes "sign up" button enabled (default: false)
+vc.widgetType = .login // widget type (possible values: ".login", ".register")
+vc.showPopup()
+```
+##### PianoOAuthDelegate protocol
+```Swift
+func loginSucceeded(accessToken: String)
+func loginCancelled() 
+```
+
+##### Screenshots
+<img src="./Images/oauth_iphone.png" alt="iPhone example" width="200"/>
+<img src="./Images/oauth_ipad.png" alt="iPad example" width="446"/>
+
+
+#### Piano ID user provider
+##### Piano ID only
+
+Usage similar as tinypass accounts
+```swift
+let vc = PianoIdOAuthPopupViewController(aid: "<PUBLISHER_AID>")
 ...
 vc.delegate = someDelegate // conform PianoOAuthDelegate protocol
 vc.signUpEnabled = true // makes "sign up" button enabled (default: false)
@@ -102,67 +148,55 @@ vc.widgetType = .login // widget type (possible values: ".login", ".register")
 vc.showPopup()
 ```
 
-##### PianoOAuthDelegate protocol
+##### Piano ID with social sign in
+PianoID requires a custom URL Scheme to be added to your project. To add: open your project configuration select your app from the TARGETS section, then select the Info tab, and expand the URL Types section. 
+
+Set ```<PUBLISHER_AID>.piano.id.oauth```
+as URL schemes. For example:
+<img src="./Images/url_types.png" alt="Url scheme example" width="446"/>
+
+To enable social sign in, you must configure the PianoID shared instance before usage.
+
+```swift
+PianoID.shared.aid = "<PUBLISHER_AID>"
+PianoID.shared.delegate = self
+```
+
+Also you must implement the ```application(_:open:options:)``` method of your app delegate and call ```handleUrl``` method of ```PianoID``` instance
+```swift
+func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
+    return PianoID.shared.handleUrl(url, options: options)
+}
+```
+For iOS 8 and older  you must implement the  deprecated ```application(_:open:sourceApplication:annotation:)``` method of your app delegate and call ```handleUrl``` method of ```PianoID``` instance
+```swift
+func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
+    return PianoID.shared.handleUrl(url, sourceApp: sourceApplication, annotation: annotation)
+}
+```
+
+
+To sign in:
+```swift
+PianoID.shared.signIn()
+```
+
+To sign out:
+```swift
+PianoID.shared.signOut(token: "<TOKEN>")
+```
+
+Additional settings:
+```swift
+PianoID.shared.isSandbox = true // for using sandbox application
+PianoID.shared.widgetType = .login // or .register for choosing default screen 
+PianoID.shared.signUpEnabled = false // for enabling/disabling signUp
+```
+
+
+##### PianoIDDelegate protocol
 ```Swift
-func loginSucceeded(accessToken: String)
-func loginCancelled() 
+optional func pianoID(_ pianoID: PianoID, didSignInWithToken token: String!, withError error: Error!) // when sign in complete
+optional func pianoID(_ pianoID: PianoID, didSignOutForToken token: String, withError error: Error!) // when sign out complete 
+optional func pianoIDSignInDidCancel(_ pianoID: PianoID) // when user cancel sign in
 ```
-
-### Objective C
-##### Imports
-```objective-c
-#import "PianoOAuth/PianoOAuth-Swift.h"
-#import "PianoComposer/PianoComposer-Swift.h"
-```
-
-##### Composer initialization
-```objective-c
-PianoComposer *composer = [[PianoComposer alloc] initWithAid:@"AID"];
-composer.delegate = self;
-composer.tags = [NSSet setWithObjects: @"tag1", @"tag2", nil]; // set tags
-composer.referrer = @"http://sitename.com"; // set referrer
-composer.url = @"http://pubsite.com/page1"; // set url
-composer.zoneId = @"Zone1";
-composer.userToken = @"userToken";
-composer.customVariables = [[NSDictionary alloc] initWithObjectsAndKeys: @"1", @"customId", nil];
-```
-
-##### Composer execution
-```objective-c 
-[composer execute]
-``` 
-
-##### PianoComposerDelegate protocol
-```objective-c
-
-@optional
-- (void)composerExecutionCompleted:(PianoComposer * _Nonnull)composer;
-- (void)showLogin:(PianoComposer * _Nonnull)composer event:(XpEvent * _Nonnull)event params:(ShowLoginEventParams * _Nullable)params;
-- (void)showTemplate:(PianoComposer * _Nonnull)composer event:(XpEvent * _Nonnull)event params:(ShowTemplateEventParams * _Nullable)params;
-- (void)nonSite:(PianoComposer * _Nonnull)composer event:(XpEvent * _Nonnull)event;
-- (void)userSegmentTrue:(PianoComposer * _Nonnull)composer event:(XpEvent * _Nonnull)event;
-- (void)userSegmentFalse:(PianoComposer * _Nonnull)composer event:(XpEvent * _Nonnull)event;
-- (void)meterActive:(PianoComposer * _Nonnull)composer event:(XpEvent * _Nonnull)event params:(PageViewMeterEventParams * _Nullable)params;
-- (void)meterExpired:(PianoComposer * _Nonnull)composer event:(XpEvent * _Nonnull)event params:(PageViewMeterEventParams * _Nullable)params;
-- (void)experienceExecute:(PianoComposer * _Nonnull)composer event:(XpEvent * _Nonnull)event params:(ExperienceExecuteEventParams * _Nullable)params;
-```
-
-##### OAuth usage
-```objective-c 
-PianoOAuthPopupViewController *vc = [[PianoOAuthPopupViewController alloc] initWithAid:@"AID"];
-vc.delegate = self;
-vc.signUpEnabled = true;
-vc.widgetType = WidgetTypeLogin;
-[vc showPopup];
-```
-
-##### PianoOAuthDelegate protocol
-```objective-c 
-- (void)loginSucceeded:(NSString * _Nonnull)accessToken;
-- (void)loginCancelled;
-```
-
-
-### Screenshots
-<img src="Images/oauth_iphone.png" alt="OAuth_screenshot_1" height="335px" width="200px" />
-<img src="Images/oauth_ipad.png" alt="OAuth_screenshot_2" height="335px" width="446px" />
