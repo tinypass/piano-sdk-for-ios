@@ -29,8 +29,8 @@ Add the following lines to your `Podfile`.
 ```
 use_frameworks!
 
-pod 'PianoComposer', '~>2.3.0'
-pod 'PianoOAuth', '~>2.3.0'
+pod 'PianoComposer', '~>2.3.1'
+pod 'PianoOAuth', '~>2.3.1'
 ```
 
 Then run `pod install`. For details of the installation and usage of CocoaPods, visit [official web site](https://cocoapods.org/).
@@ -151,7 +151,7 @@ vc.showPopup()
 ##### Piano ID with social sign in
 PianoID requires a custom URL Scheme to be added to your project. To add: open your project configuration select your app from the TARGETS section, then select the Info tab, and expand the URL Types section. 
 
-Set ```<PUBLISHER_AID>.piano.id.oauth```
+Set ```piano.id.oauth.<PUBLISHER_AID>```
 as URL schemes. For example:
 <img src="./Images/url_types.png" alt="Url scheme example" width="446"/>
 
