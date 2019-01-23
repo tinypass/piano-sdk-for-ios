@@ -7,7 +7,7 @@ Piano SDK includes embedded dynamic frameworks written in Swift.
 [![Platform](https://img.shields.io/cocoapods/p/PianoComposer.svg?style=flat)](http://cocoapods.org/pods/PianoComposer)
 [![License](https://img.shields.io/cocoapods/l/PianoComposer.svg?style=flat)](http://cocoapods.org/pods/PianoComposer)
 
-- **[PianoOAuth](http://cocoapods.org/pods/PianoOAuth):** component for authentication tinypass accounts). Frameworks can be used for development iOS applications on Objective-c and Swift.
+- **[PianoOAuth](http://cocoapods.org/pods/PianoOAuth):** component for authentication Piano accounts). Frameworks can be used for development iOS applications on Objective-c and Swift.
 
 [![Version](https://img.shields.io/cocoapods/v/PianoOAuth.svg?style=flat)](http://cocoapods.org/pods/PianoOAuth)
 [![Platform](https://img.shields.io/cocoapods/p/PianoOAuth.svg?style=flat)](http://cocoapods.org/pods/PianoOAuth)
@@ -114,10 +114,10 @@ import PianoOAuth
 
 ```
 
-#### Tinypass accounts user provider
+#### Piano accounts user provider
 ##### Usage
 ```Swift
-let vc = PianoOAuthPopupViewController(aid: "<PUBLISHER_AID>") // for tinypass accounts user provider
+let vc = PianoOAuthPopupViewController(aid: "<PUBLISHER_AID>") // for piano accounts user provider
 ...
 vc.delegate = someDelegate // conform PianoOAuthDelegate protocol
 vc.signUpEnabled = true // makes "sign up" button enabled (default: false)
@@ -138,7 +138,7 @@ func loginCancelled()
 #### Piano ID user provider
 ##### Piano ID only
 
-Usage similar as tinypass accounts
+Usage similar as Piano accounts
 ```swift
 let vc = PianoIdOAuthPopupViewController(aid: "<PUBLISHER_AID>")
 ...
