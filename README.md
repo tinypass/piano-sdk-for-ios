@@ -29,8 +29,8 @@ Add the following lines to your `Podfile`.
 ```
 use_frameworks!
 
-pod 'PianoComposer', '~>2.3.2'
-pod 'PianoOAuth', '~>2.3.2'
+pod 'PianoComposer', '~>2.3.3'
+pod 'PianoOAuth', '~>2.3.3'
 ```
 
 Then run `pod install`. For details of the installation and usage of CocoaPods, visit [official web site](https://cocoapods.org/).
@@ -45,7 +45,7 @@ import PianoComposer
 ```
 ```
 // objective-c
-#import "PianoComposer/PianoComposer-Swift.h"
+@import PianoComposer;
 ```
 
 ##### Usage
@@ -110,7 +110,7 @@ import PianoOAuth
 ```
 ```
 // objective-c
-#import "PianoOAuth/PianoOAuth-Swift.h"
+@import PianoOAuth;
 
 ```
 
