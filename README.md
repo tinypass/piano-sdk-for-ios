@@ -17,8 +17,8 @@ This document details the process of integrating the Piano SDK with your iOS app
 
 ## Requirements
 - iOS 8.0+
-- Xcode 10.2
-- Swift 5.0
+- Xcode 11.0
+- Swift 5.1
 
 ## Installation
 
