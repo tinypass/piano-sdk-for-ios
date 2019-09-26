@@ -187,6 +187,7 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 #if __has_warning("-Watimport-in-framework-header")
 #pragma clang diagnostic ignored "-Watimport-in-framework-header"
 #endif
+@import AuthenticationServices;
 @import Foundation;
 @import ObjectiveC;
 @import SafariServices;
@@ -282,6 +283,13 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) PianoID * _N
 SWIFT_AVAILABILITY(ios,introduced=9.0)
 @interface PianoID (SWIFT_EXTENSION(PianoOAuth)) <SFSafariViewControllerDelegate>
 - (void)safariViewControllerDidFinish:(SFSafariViewController * _Nonnull)controller;
+@end
+
+@class ASWebAuthenticationSession;
+
+SWIFT_AVAILABILITY(ios,introduced=13.0)
+@interface PianoID (SWIFT_EXTENSION(PianoOAuth)) <ASWebAuthenticationPresentationContextProviding>
+- (ASPresentationAnchor _Nonnull)presentationAnchorForWebAuthenticationSession:(ASWebAuthenticationSession * _Nonnull)session SWIFT_WARN_UNUSED_RESULT;
 @end
 
 
@@ -519,6 +527,7 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 #if __has_warning("-Watimport-in-framework-header")
 #pragma clang diagnostic ignored "-Watimport-in-framework-header"
 #endif
+@import AuthenticationServices;
 @import Foundation;
 @import ObjectiveC;
 @import SafariServices;
@@ -614,6 +623,13 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) PianoID * _N
 SWIFT_AVAILABILITY(ios,introduced=9.0)
 @interface PianoID (SWIFT_EXTENSION(PianoOAuth)) <SFSafariViewControllerDelegate>
 - (void)safariViewControllerDidFinish:(SFSafariViewController * _Nonnull)controller;
+@end
+
+@class ASWebAuthenticationSession;
+
+SWIFT_AVAILABILITY(ios,introduced=13.0)
+@interface PianoID (SWIFT_EXTENSION(PianoOAuth)) <ASWebAuthenticationPresentationContextProviding>
+- (ASPresentationAnchor _Nonnull)presentationAnchorForWebAuthenticationSession:(ASWebAuthenticationSession * _Nonnull)session SWIFT_WARN_UNUSED_RESULT;
 @end
 
 
@@ -855,6 +871,7 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 #if __has_warning("-Watimport-in-framework-header")
 #pragma clang diagnostic ignored "-Watimport-in-framework-header"
 #endif
+@import AuthenticationServices;
 @import Foundation;
 @import ObjectiveC;
 @import SafariServices;
@@ -950,6 +967,13 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) PianoID * _N
 SWIFT_AVAILABILITY(ios,introduced=9.0)
 @interface PianoID (SWIFT_EXTENSION(PianoOAuth)) <SFSafariViewControllerDelegate>
 - (void)safariViewControllerDidFinish:(SFSafariViewController * _Nonnull)controller;
+@end
+
+@class ASWebAuthenticationSession;
+
+SWIFT_AVAILABILITY(ios,introduced=13.0)
+@interface PianoID (SWIFT_EXTENSION(PianoOAuth)) <ASWebAuthenticationPresentationContextProviding>
+- (ASPresentationAnchor _Nonnull)presentationAnchorForWebAuthenticationSession:(ASWebAuthenticationSession * _Nonnull)session SWIFT_WARN_UNUSED_RESULT;
 @end
 
 
@@ -1187,6 +1211,7 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 #if __has_warning("-Watimport-in-framework-header")
 #pragma clang diagnostic ignored "-Watimport-in-framework-header"
 #endif
+@import AuthenticationServices;
 @import Foundation;
 @import ObjectiveC;
 @import SafariServices;
@@ -1282,6 +1307,13 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) PianoID * _N
 SWIFT_AVAILABILITY(ios,introduced=9.0)
 @interface PianoID (SWIFT_EXTENSION(PianoOAuth)) <SFSafariViewControllerDelegate>
 - (void)safariViewControllerDidFinish:(SFSafariViewController * _Nonnull)controller;
+@end
+
+@class ASWebAuthenticationSession;
+
+SWIFT_AVAILABILITY(ios,introduced=13.0)
+@interface PianoID (SWIFT_EXTENSION(PianoOAuth)) <ASWebAuthenticationPresentationContextProviding>
+- (ASPresentationAnchor _Nonnull)presentationAnchorForWebAuthenticationSession:(ASWebAuthenticationSession * _Nonnull)session SWIFT_WARN_UNUSED_RESULT;
 @end
 
 
