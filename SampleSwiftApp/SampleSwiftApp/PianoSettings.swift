@@ -1,5 +1,7 @@
 import UIKit
 
-open class PianoSettings: NSObject {
-    open static let publisherAid = "AID"
+public class PianoSettings: NSObject {
+    
+    public static var AID = "<AID"        
 }
+

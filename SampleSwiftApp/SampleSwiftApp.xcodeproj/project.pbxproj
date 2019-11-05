@@ -12,12 +12,11 @@
 		0D24ED5F1D0018F5001BE082 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0D24ED5D1D0018F5001BE082 /* Main.storyboard */; };
 		0D24ED611D0018F5001BE082 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0D24ED601D0018F5001BE082 /* Assets.xcassets */; };
 		0D24ED641D0018F5001BE082 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0D24ED621D0018F5001BE082 /* LaunchScreen.storyboard */; };
-		0D606A661D2143EF0016FB4C /* PianoComposer.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0D606A631D2143DF0016FB4C /* PianoComposer.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		0D606A681D2144030016FB4C /* PianoOAuth.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0D606A5F1D2143D80016FB4C /* PianoOAuth.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		0D66F76B1E9BB7E500728F42 /* PianoComposer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D606A631D2143DF0016FB4C /* PianoComposer.framework */; };
-		0D66F76C1E9BB7E500728F42 /* PianoOAuth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D606A5F1D2143D80016FB4C /* PianoOAuth.framework */; };
+		0DB9725923717CD100B26DF2 /* PianoComposer.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0DB9725423717C0F00B26DF2 /* PianoComposer.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		0DB9725A23717CD100B26DF2 /* PianoOAuth.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0DB9725323717C0F00B26DF2 /* PianoOAuth.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		0DC3C9151D2256120056A0E1 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DC3C9141D2256120056A0E1 /* MainViewController.swift */; };
 		0DC3C9171D2258B00056A0E1 /* PianoSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DC3C9161D2258B00056A0E1 /* PianoSettings.swift */; };
+		66B8D6A121B6B2410038C2A2 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66B8D6A021B6B2410038C2A2 /* SettingsViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -27,8 +26,8 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				0D606A681D2144030016FB4C /* PianoOAuth.framework in Embed Frameworks */,
-				0D606A661D2143EF0016FB4C /* PianoComposer.framework in Embed Frameworks */,
+				0DB9725923717CD100B26DF2 /* PianoComposer.framework in Embed Frameworks */,
+				0DB9725A23717CD100B26DF2 /* PianoOAuth.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -43,10 +42,11 @@
 		0D24ED601D0018F5001BE082 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0D24ED631D0018F5001BE082 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0D24ED651D0018F5001BE082 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		0D606A5F1D2143D80016FB4C /* PianoOAuth.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = PianoOAuth.framework; path = ../Frameworks/PianoOAuth.framework; sourceTree = "<group>"; };
-		0D606A631D2143DF0016FB4C /* PianoComposer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PianoComposer.framework; path = ../Frameworks/PianoComposer.framework; sourceTree = "<group>"; };
+		0DB9725323717C0F00B26DF2 /* PianoOAuth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PianoOAuth.framework; path = ../Frameworks/PianoOAuth.framework; sourceTree = "<group>"; };
+		0DB9725423717C0F00B26DF2 /* PianoComposer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PianoComposer.framework; path = ../Frameworks/PianoComposer.framework; sourceTree = "<group>"; };
 		0DC3C9141D2256120056A0E1 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		0DC3C9161D2258B00056A0E1 /* PianoSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PianoSettings.swift; sourceTree = "<group>"; };
+		66B8D6A021B6B2410038C2A2 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,8 +54,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0D66F76B1E9BB7E500728F42 /* PianoComposer.framework in Frameworks */,
-				0D66F76C1E9BB7E500728F42 /* PianoOAuth.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -65,10 +63,9 @@
 		0D24ED4D1D0018F5001BE082 = {
 			isa = PBXGroup;
 			children = (
-				0D606A631D2143DF0016FB4C /* PianoComposer.framework */,
-				0D606A5F1D2143D80016FB4C /* PianoOAuth.framework */,
 				0D24ED581D0018F5001BE082 /* SampleSwiftApp */,
 				0D24ED571D0018F5001BE082 /* Products */,
+				0DB9725223717C0E00B26DF2 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -84,15 +81,25 @@
 			isa = PBXGroup;
 			children = (
 				0D24ED591D0018F5001BE082 /* AppDelegate.swift */,
+				0DC3C9141D2256120056A0E1 /* MainViewController.swift */,
 				0D24ED5B1D0018F5001BE082 /* ViewController.swift */,
 				0D24ED5D1D0018F5001BE082 /* Main.storyboard */,
 				0D24ED601D0018F5001BE082 /* Assets.xcassets */,
 				0D24ED621D0018F5001BE082 /* LaunchScreen.storyboard */,
 				0D24ED651D0018F5001BE082 /* Info.plist */,
-				0DC3C9141D2256120056A0E1 /* MainViewController.swift */,
 				0DC3C9161D2258B00056A0E1 /* PianoSettings.swift */,
+				66B8D6A021B6B2410038C2A2 /* SettingsViewController.swift */,
 			);
 			path = SampleSwiftApp;
+			sourceTree = "<group>";
+		};
+		0DB9725223717C0E00B26DF2 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				0DB9725423717C0F00B26DF2 /* PianoComposer.framework */,
+				0DB9725323717C0F00B26DF2 /* PianoOAuth.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -122,19 +129,20 @@
 		0D24ED4E1D0018F5001BE082 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0730;
-				LastUpgradeCheck = 0800;
+				LastSwiftUpdateCheck = 1010;
+				LastUpgradeCheck = 1020;
 				ORGANIZATIONNAME = piano;
 				TargetAttributes = {
 					0D24ED551D0018F5001BE082 = {
 						CreatedOnToolsVersion = 7.3;
-						LastSwiftMigration = 0800;
+						DevelopmentTeam = W6L4RQ2JL6;
+						LastSwiftMigration = 1020;
 					};
 				};
 			};
 			buildConfigurationList = 0D24ED511D0018F5001BE082 /* Build configuration list for PBXProject "SampleSwiftApp" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
@@ -171,6 +179,7 @@
 				0DC3C9151D2256120056A0E1 /* MainViewController.swift in Sources */,
 				0D24ED5C1D0018F5001BE082 /* ViewController.swift in Sources */,
 				0DC3C9171D2258B00056A0E1 /* PianoSettings.swift in Sources */,
+				66B8D6A121B6B2410038C2A2 /* SettingsViewController.swift in Sources */,
 				0D24ED5A1D0018F5001BE082 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -201,19 +210,28 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -222,6 +240,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				FRAMEWORK_SEARCH_PATHS = ../Frameworks;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -236,11 +255,13 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
+				LIBRARY_SEARCH_PATHS = ../Frameworks;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -249,19 +270,28 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -270,6 +300,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				FRAMEWORK_SEARCH_PATHS = ../Frameworks;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -278,10 +309,12 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
+				LIBRARY_SEARCH_PATHS = ../Frameworks;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -292,13 +325,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				DEVELOPMENT_TEAM = "";
-				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/../Frameworks";
+				DEVELOPMENT_TEAM = W6L4RQ2JL6;
 				INFOPLIST_FILE = SampleSwiftApp/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.piano.ios.SampleSwiftApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -307,13 +340,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				DEVELOPMENT_TEAM = "";
-				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/../Frameworks";
+				DEVELOPMENT_TEAM = W6L4RQ2JL6;
 				INFOPLIST_FILE = SampleSwiftApp/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.piano.ios.SampleSwiftApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};

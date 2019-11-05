@@ -29,8 +29,8 @@ Add the following lines to your `Podfile`.
 ```
 use_frameworks!
 
-pod 'PianoComposer', '~>2.3.4'
-pod 'PianoOAuth', '~>2.3.4'
+pod 'PianoComposer', '~>2.3.5'
+pod 'PianoOAuth', '~>2.3.5'
 ```
 
 Then run `pod install`. For details of the installation and usage of CocoaPods, visit [official web site](https://cocoapods.org/).
@@ -73,7 +73,7 @@ composer.endpointUrl(endpointUrl: PianoComposer.sandboxEndpointUrl)
 ```
 
 ##### Composer execution
-```Swift 
+```swift 
 composer.execute()
 ``` 
 
@@ -116,7 +116,7 @@ import PianoOAuth
 
 #### Piano accounts user provider
 ##### Usage
-```Swift
+```swift
 let vc = PianoOAuthPopupViewController(aid: "<PUBLISHER_AID>") // for piano accounts user provider
 ...
 vc.delegate = someDelegate // conform PianoOAuthDelegate protocol
@@ -125,7 +125,7 @@ vc.widgetType = .login // widget type (possible values: ".login", ".register")
 vc.showPopup()
 ```
 ##### PianoOAuthDelegate protocol
-```Swift
+```swift
 func loginSucceeded(accessToken: String)
 func loginCancelled() 
 ```
@@ -195,8 +195,15 @@ PianoID.shared.signUpEnabled = false // for enabling/disabling signUp
 
 
 ##### PianoIDDelegate protocol
-```Swift
+```swift
 optional func pianoID(_ pianoID: PianoID, didSignInWithToken token: String!, withError error: Error!) // when sign in complete
 optional func pianoID(_ pianoID: PianoID, didSignOutForToken token: String, withError error: Error!) // when sign out complete 
 optional func pianoIDSignInDidCancel(_ pianoID: PianoID) // when user cancel sign in
+```
+
+
+##### Show templates
+We recommend to use that tag in mobile templates for correct display on iOS devices
+```html
+<meta name="viewport" content="width=device-width, initial-scale=1">
 ```
