@@ -29,8 +29,8 @@ Add the following lines to your `Podfile`.
 ```
 use_frameworks!
 
-pod 'PianoComposer', '~>2.3.8'
-pod 'PianoOAuth', '~>2.3.8'
+pod 'PianoComposer', '~>2.3.7'
+pod 'PianoOAuth', '~>2.3.7'
 ```
 
 Then run `pod install`. For details of the installation and usage of CocoaPods, visit [official web site](https://cocoapods.org/).
@@ -93,10 +93,11 @@ optional func meterExpired(composer: PianoComposer, event: XpEvent, params: Page
 optional func experienceExecute(composer: PianoComposer, event: XpEvent, params: ExperienceExecuteEventParams?)
 ```
 
-##### Show templates
-We recommend to use that tag in mobile templates for correct display on iOS devices
-```html
-<meta name="viewport" content="width=device-width, initial-scale=1">
+
+##### PianoOAuthDelegate protocol
+```swift
+func loginSucceeded(accessToken: String)
+func loginCancelled() 
 ```
 
 
@@ -135,11 +136,22 @@ func loginCancelled()
 
 
 #### Piano ID user provider
+##### Piano ID only
 
-##### Piano ID
+Usage similar as Piano accounts
+```swift
+let vc = PianoIdOAuthPopupViewController(aid: "<PUBLISHER_AID>")
+...
+vc.delegate = someDelegate // conform PianoOAuthDelegate protocol
+vc.signUpEnabled = true // makes "sign up" button enabled (default: false)
+vc.widgetType = .login // widget type (possible values: ".login", ".register")
+vc.showPopup()
+```
+
+##### Piano ID with social sign in
 PianoID requires a custom URL Scheme to be added to your project. To add: open your project configuration select your app from the TARGETS section, then select the Info tab, and expand the URL Types section. 
 
-Set ```io.piano.id..<PUBLISHER_AID_LOWERCASE>```
+Set ```piano.id.oauth.<PUBLISHER_AID>```
 as URL schemes. For example:
 <img src="./Images/url_types.png" alt="Url scheme example" width="446"/>
 
@@ -150,17 +162,16 @@ PianoID.shared.aid = "<PUBLISHER_AID>"
 PianoID.shared.delegate = self
 ```
 
-Also you must implement the ```application(_:open:options:)``` method of your app delegate
+Also you must implement the ```application(_:open:options:)``` method of your app delegate and call ```handleUrl``` method of ```PianoID``` instance
 ```swift
-func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
-    return PianoOAuth.PianoIDApplicationDelegate.shared.application(app, open: url, options: options)
+func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
+    return PianoID.shared.handleUrl(url, options: options)
 }
-
 ```
-For iOS 8 and older  you must implement the  deprecated ```application(_:open:sourceApplication:annotation:)``` method of your app delegate
+For iOS 8 and older  you must implement the  deprecated ```application(_:open:sourceApplication:annotation:)``` method of your app delegate and call ```handleUrl``` method of ```PianoID``` instance
 ```swift
 func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
-    return PianoOAuth.PianoIDApplicationDelegate.shared.application(application, open: url, sourceApplication: sourceApplication, annotation: annotation)
+    return PianoID.shared.handleUrl(url, sourceApp: sourceApplication, annotation: annotation)
 }
 ```
 
@@ -181,34 +192,18 @@ PianoID.shared.isSandbox = true // for using sandbox application
 PianoID.shared.widgetType = .login // or .register for choosing default screen 
 PianoID.shared.signUpEnabled = false // for enabling/disabling signUp
 ```
-##### Native Google Sign In SDK
-You must implement the ```application(_:didFinishLaunchingWithOptions:)``` method of your app delegate
-```swift
-func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-    PianoID.shared.useNativeGoogleSignInSDK = PianoSettings.useGoogleNativeSDK
-    PianoID.shared.googleClientId = "<PUBLISHER_GOOGLE_CLIENT_ID>"    
-    return true
-}
-```
-Information about <PUBLISHER_GOOGLE_CLIENT_ID> can be found here:  https://developers.google.com/identity/sign-in/ios/start-integrating#get_an_oauth_client_id
 
-
-Also you should configure URL scheme as described here:  https://developers.google.com/identity/sign-in/ios/start-integrating#add_a_url_scheme_to_your_project
-
-##### Native Facebook Sign In SDK
-You must implement the ```application(_:didFinishLaunchingWithOptions:)``` method of your app delegate
-```swift
-func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {    
-    PianoID.shared.useNativeFacebookSignInSDK = PianoSettings.useFacebookNativeSDK
-    PianoOAuth.PianoIDApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
-    return true
-}
-```
-Also you should configure your application as described here: https://developers.facebook.com/docs/swift/register-your-app#configuresettings
 
 ##### PianoIDDelegate protocol
 ```swift
-func pianoID(_ pianoID: PianoID, didSignInForToken token: PianoIDToken!, withError error: Error!)
-func pianoID(_ pianoID: PianoID, didSignOutWithError error: Error!)
-pianoIDSignInDidCancel(_ pianoID: PianoID)
+optional func pianoID(_ pianoID: PianoID, didSignInWithToken token: String!, withError error: Error!) // when sign in complete
+optional func pianoID(_ pianoID: PianoID, didSignOutForToken token: String, withError error: Error!) // when sign out complete 
+optional func pianoIDSignInDidCancel(_ pianoID: PianoID) // when user cancel sign in
+```
+
+
+##### Show templates
+We recommend to use that tag in mobile templates for correct display on iOS devices
+```html
+<meta name="viewport" content="width=device-width, initial-scale=1">
 ```

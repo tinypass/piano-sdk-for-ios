@@ -33,12 +33,6 @@ class MainViewController: UITableViewController {
                 vc.widgetType = .login
                 vc.show()
             case 1:
-                let vc = PianoIdOAuthPopupViewController(aid: PianoSettings.AID)
-                vc.delegate = self
-                vc.signUpEnabled = true
-                vc.widgetType = .login
-                vc.show()
-            case 2:
                 PianoID.shared.aid = PianoSettings.AID
                 PianoID.shared.signUpEnabled = true
                 PianoID.shared.widgetType = .login

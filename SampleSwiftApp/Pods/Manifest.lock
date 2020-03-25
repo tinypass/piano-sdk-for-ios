@@ -1,0 +1,20 @@
+PODS:
+  - PianoComposer (2.3.7)
+  - PianoOAuth (2.3.7)
+
+DEPENDENCIES:
+  - PianoComposer
+  - PianoOAuth
+
+SPEC REPOS:
+  trunk:
+    - PianoComposer
+    - PianoOAuth
+
+SPEC CHECKSUMS:
+  PianoComposer: 4bda2bc7bfc15ba8fca4ef568b50557a152352e5
+  PianoOAuth: 3701b04bf31a05c9e20f311d2aa41cc4e5698244
+
+PODFILE CHECKSUM: 95889dc1dccf0f53578229be4d5fbbb6d5ad0e0f
+
+COCOAPODS: 1.9.1

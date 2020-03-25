@@ -2,6 +2,6 @@ import UIKit
 
 public class PianoSettings: NSObject {
     
-    public static var AID = "<AID"        
+    public static var AID = "IBhnun0af3"        
 }
 
