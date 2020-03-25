@@ -1,5 +1,5 @@
 # Piano SDK for iOS
-Piano SDK includes embedded dynamic frameworks written in Swift.
+Piano SDK includes dynamic frameworks written in Swift.
 
 - **[PianoComposer](http://cocoapods.org/pods/PianoComposer):** provides access to the mobile composer
 
@@ -29,8 +29,8 @@ Add the following lines to your `Podfile`.
 ```
 use_frameworks!
 
-pod 'PianoComposer', '~>2.3.8'
-pod 'PianoOAuth', '~>2.3.8'
+pod 'PianoComposer', '~>2.3.8-alpha1'
+pod 'PianoOAuth', '~>2.3.8-alpha1'
 ```
 
 Then run `pod install`. For details of the installation and usage of CocoaPods, visit [official web site](https://cocoapods.org/).
