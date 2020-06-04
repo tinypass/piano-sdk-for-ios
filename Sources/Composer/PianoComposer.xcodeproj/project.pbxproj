@@ -6,20 +6,6 @@
 	objectVersion = 46;
 	objects = {
 
-/* Begin PBXAggregateTarget section */
-		0DCAF28B1D151BD0007A3A21 /* ReleasePianoComposerFramework */ = {
-			isa = PBXAggregateTarget;
-			buildConfigurationList = 0DCAF28C1D151BD0007A3A21 /* Build configuration list for PBXAggregateTarget "ReleasePianoComposerFramework" */;
-			buildPhases = (
-				0DCAF28F1D151C1D007A3A21 /* ShellScript */,
-			);
-			dependencies = (
-			);
-			name = ReleasePianoComposerFramework;
-			productName = BuildFramework;
-		};
-/* End PBXAggregateTarget section */
-
 /* Begin PBXFileReference section */
 		0D05490E20B5A6A8001A1653 /* PianoLogger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PianoLogger.swift; path = Util/PianoLogger.swift; sourceTree = "<group>"; };
 		0D1819811E967BE2008830FB /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Extensions.swift; path = Util/Extensions.swift; sourceTree = "<group>"; };
@@ -169,14 +155,9 @@
 		0DCB73581CFF3841007BEC6E /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0730;
+				LastSwiftUpdateCheck = 1140;
 				LastUpgradeCheck = 1100;
 				ORGANIZATIONNAME = piano;
-				TargetAttributes = {
-					0DCAF28B1D151BD0007A3A21 = {
-						CreatedOnToolsVersion = 7.3;
-					};
-				};
 			};
 			buildConfigurationList = 0DCB735B1CFF3841007BEC6E /* Build configuration list for PBXProject "PianoComposer" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -191,46 +172,11 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				0DCAF28B1D151BD0007A3A21 /* ReleasePianoComposerFramework */,
 			);
 		};
 /* End PBXProject section */
 
-/* Begin PBXShellScriptBuildPhase section */
-		0DCAF28F1D151C1D007A3A21 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "# Merge Script\n\n# 1\n# Set bash script to exit immediately if any commands fail.\nset -e\npwd\n\n# 2\n# Setup some constants for use later on.\nFRAMEWORK_NAME=\"PianoComposer\"\nBUNDLE_VERSION=\"${MARKETING_VERSION}\"\nRELEASE_DIR=\"${HOME}/Desktop/PianoSDK/v$BUNDLE_VERSION/\"\n\n# 3\n# If remnants from a previous build exist, delete them.\nif [ -d \"${SRCROOT}/build\" ]; then\nrm -rf \"${SRCROOT}/build\"\nfi\n\n# 4\n# Build the framework for device and for simulator (using\n# all needed architectures).\nxcodebuild -target \"${FRAMEWORK_NAME}\" -configuration Release -arch x86_64 -arch i386 -arch arm64 -arch armv7 -arch armv7s only_active_arch=no defines_module=yes -sdk \"iphoneos\" clean build\nxcodebuild -target \"${FRAMEWORK_NAME}\" -configuration Release -arch x86_64 -arch i386 -arch arm64 -arch armv7 -arch armv7s only_active_arch=no defines_module=yes -sdk \"iphonesimulator\"\n\n# 5\n# Create release dir if not exist. Remove .framework file if exists from previous run.\nmkdir -p \"${RELEASE_DIR}\"\n\nif [ -d \"${RELEASE_DIR}/${FRAMEWORK_NAME}.framework\" ]; then\nrm -rf \"${RELEASE_DIR}/${FRAMEWORK_NAME}.framework\"\nfi\n\n# 6\n# Copy the device version of framework to release folder.\ncp -r \"${SRCROOT}/build/Release-iphoneos/${FRAMEWORK_NAME}.framework\" \"${RELEASE_DIR}/${FRAMEWORK_NAME}.framework\"\n\n# 7\n# Replace the framework executable within the framework with\n# a new version created by merging the device and simulator\n# frameworks' executables with lipo.\nlipo -create -output \"${RELEASE_DIR}/${FRAMEWORK_NAME}.framework/${FRAMEWORK_NAME}\" \"${SRCROOT}/build/Release-iphoneos/${FRAMEWORK_NAME}.framework/${FRAMEWORK_NAME}\" \"${SRCROOT}/build/Release-iphonesimulator/${FRAMEWORK_NAME}.framework/${FRAMEWORK_NAME}\"\n\n# 8\n# Copy the Swift module mappings for the simulator into the\n# framework.  The device mappings already exist from step 6.\ncp -r \"${SRCROOT}/build/Release-iphonesimulator/${FRAMEWORK_NAME}.framework/Modules/${FRAMEWORK_NAME}.swiftmodule/\" \"${RELEASE_DIR}/${FRAMEWORK_NAME}.framework/Modules/${FRAMEWORK_NAME}.swiftmodule\"\n\n# Merge headers\ncat \"${SRCROOT}/build/Release-iphonesimulator/${FRAMEWORK_NAME}.framework/Headers/${FRAMEWORK_NAME}-Swift.h\" >> \"${RELEASE_DIR}/${FRAMEWORK_NAME}.framework/Headers/${FRAMEWORK_NAME}-Swift.h\"\n\n# 9\n# Delete the most recent build.\nif [ -d \"${SRCROOT}/build\" ]; then\nrm -rf \"${SRCROOT}/build\"\nfi\n\n# 10\n# Open release folder\nopen \"${RELEASE_DIR}\"\n";
-		};
-/* End PBXShellScriptBuildPhase section */
-
 /* Begin XCBuildConfiguration section */
-		0DCAF28D1D151BD0007A3A21 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				MARKETING_VERSION = "$(inherited)";
-				PRODUCT_NAME = PianoComposer;
-			};
-			name = Debug;
-		};
-		0DCAF28E1D151BD0007A3A21 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				MARKETING_VERSION = "$(inherited)";
-				PRODUCT_NAME = PianoComposer;
-			};
-			name = Release;
-		};
 		0DCB73731CFF3841007BEC6E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -282,7 +228,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				MARKETING_VERSION = 2.3.7;
+				MARKETING_VERSION = 2.3.8;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -339,7 +285,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				MARKETING_VERSION = 2.3.7;
+				MARKETING_VERSION = 2.3.8;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				ONLY_ACTIVE_ARCH = NO;
 				SDKROOT = iphoneos;
@@ -355,15 +301,6 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		0DCAF28C1D151BD0007A3A21 /* Build configuration list for PBXAggregateTarget "ReleasePianoComposerFramework" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				0DCAF28D1D151BD0007A3A21 /* Debug */,
-				0DCAF28E1D151BD0007A3A21 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		0DCB735B1CFF3841007BEC6E /* Build configuration list for PBXProject "PianoComposer" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

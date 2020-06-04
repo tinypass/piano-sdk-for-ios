@@ -29,8 +29,8 @@ Add the following lines to your `Podfile`.
 ```
 use_frameworks!
 
-pod 'PianoComposer', '~>2.3.8-alpha1'
-pod 'PianoOAuth', '~>2.3.8-alpha1'
+pod 'PianoComposer', '~>2.3.8'
+pod 'PianoOAuth', '~>2.3.8'
 ```
 
 Then run `pod install`. For details of the installation and usage of CocoaPods, visit [official web site](https://cocoapods.org/).
@@ -73,23 +73,23 @@ composer.endpointUrl(endpointUrl: PianoComposer.sandboxEndpointUrl)
 ```
 
 ##### Composer execution
-```swift 
+```swift
 composer.execute()
-``` 
+```
 
 ##### PianoComposerDelegate protocol
 ```swift
 // Client actions
 optional func composerExecutionCompleted(composer: PianoComposer)
 
-// Composer actions from server 
+// Composer actions from server
 optional func showLogin(composer: PianoComposer, event: XpEvent, params: ShowLoginEventParams?)
 optional func showTemplate(composer: PianoComposer, event: XpEvent, params: ShowTemplateEventParams?)
 optional func nonSite(composer: PianoComposer, event: XpEvent)
 optional func userSegmentTrue(composer: PianoComposer, event: XpEvent)
-optional func userSegmentFalse(composer: PianoComposer, event: XpEvent)    
+optional func userSegmentFalse(composer: PianoComposer, event: XpEvent)
 optional func meterActive(composer: PianoComposer, event: XpEvent, params: PageViewMeterEventParams?)
-optional func meterExpired(composer: PianoComposer, event: XpEvent, params: PageViewMeterEventParams?)    
+optional func meterExpired(composer: PianoComposer, event: XpEvent, params: PageViewMeterEventParams?)
 optional func experienceExecute(composer: PianoComposer, event: XpEvent, params: ExperienceExecuteEventParams?)
 ```
 
@@ -178,15 +178,14 @@ PianoID.shared.signOut(token: "<TOKEN>")
 Additional settings:
 ```swift
 PianoID.shared.isSandbox = true // for using sandbox application
-PianoID.shared.widgetType = .login // or .register for choosing default screen 
+PianoID.shared.widgetType = .login // or .register for choosing default screen
 PianoID.shared.signUpEnabled = false // for enabling/disabling signUp
 ```
 ##### Native Google Sign In SDK
 You must implement the ```application(_:didFinishLaunchingWithOptions:)``` method of your app delegate
 ```swift
 func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-    PianoID.shared.useNativeGoogleSignInSDK = PianoSettings.useGoogleNativeSDK
-    PianoID.shared.googleClientId = "<PUBLISHER_GOOGLE_CLIENT_ID>"    
+    PianoID.shared.googleClientId = "<PUBLISHER_GOOGLE_CLIENT_ID>"
     return true
 }
 ```
@@ -198,8 +197,7 @@ Also you should configure URL scheme as described here:  https://developers.goog
 ##### Native Facebook Sign In SDK
 You must implement the ```application(_:didFinishLaunchingWithOptions:)``` method of your app delegate
 ```swift
-func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {    
-    PianoID.shared.useNativeFacebookSignInSDK = PianoSettings.useFacebookNativeSDK
+func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
     PianoOAuth.PianoIDApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
     return true
 }

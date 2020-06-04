@@ -1,6 +1,7 @@
 import Foundation
 
-@objc public enum WidgetType : Int {
+@objc
+public enum WidgetType : Int {
     case login
     case register
 }

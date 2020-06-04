@@ -15,13 +15,11 @@ fileprivate enum EventType: Int {
 @objcMembers
 public class PianoComposer: NSObject {
     
-    fileprivate static let experienceEndpointUrl = "https://experience.tinypass.com"
-    fileprivate static let sandboxEndpointUrl = "https://sandbox.tinypass.com"
-    fileprivate static let platformEndpointUrl = "https://buy.tinypass.com"
+    fileprivate static let experienceEndpointUrl = "https://experience.piano.io"
+    fileprivate static let sandboxEndpointUrl = "https://sandbox.piano.io"
+    fileprivate static let platformEndpointUrl = "https://buy.piano.io"
     
-    public static let tinypassUserProviderName = "tinypass_accounts"
-    public static let pianoIdUserProviderName = "piano_id"
-    public static let janrainUserProviderName = "janrain"
+    public static let pianoIdUserProviderName = "piano_id"    
     
     public weak var delegate: PianoComposerDelegate?
     
