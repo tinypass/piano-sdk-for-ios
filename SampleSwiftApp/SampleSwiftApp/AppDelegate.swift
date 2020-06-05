@@ -6,7 +6,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {        
+        _ = PianoIDApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
         return true
     }
 
@@ -26,12 +27,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
-        return PianoID.shared.handleUrl(url, options: options)
+        return PianoIDApplicationDelegate.shared.application(app, open: url, options: options)
     }
     
     //  for ios 8 and older
     func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
-        return PianoID.shared.handleUrl(url, sourceApp: sourceApplication, annotation: annotation)
+        return PianoIDApplicationDelegate.shared.application(application, open: url, sourceApplication: sourceApplication, annotation: application)
     }
     
 }

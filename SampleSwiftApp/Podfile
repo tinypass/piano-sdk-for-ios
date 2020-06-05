@@ -6,6 +6,6 @@ target 'SampleSwiftApp' do
   use_frameworks!
 
   # Pods for SampleSwiftApp
-  pod 'PianoOAuth'
-  pod 'PianoComposer'
+  pod 'PianoOAuth', '~>2.3.8'
+  pod 'PianoComposer', '~>2.3.8'
 end

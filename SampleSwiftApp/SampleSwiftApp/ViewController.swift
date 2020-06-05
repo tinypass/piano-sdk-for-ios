@@ -198,12 +198,6 @@ extension ViewController: PianoComposerDelegate {
         output.text = output.text + "[Composer] ExpId:\(event.eventExecutionContext?.experienceId ?? "n/a") showLogin(\(params?.userProvider ?? "n/a"))\n"
         let userProvider = params?.userProvider ?? ""
         
-        if userProvider == PianoComposer.tinypassUserProviderName {
-            let vc = PianoOAuthPopupViewController(aid: composer.aid, endpointUrl: composer.endpointUrl)
-            vc.delegate = self
-            vc.show()
-        }
-        
         if userProvider == PianoComposer.pianoIdUserProviderName {
             PianoID.shared.signIn()
         }
@@ -330,8 +324,15 @@ extension ViewController: WKNavigationDelegate {
 }
 
 extension ViewController: PianoIDDelegate {
-    func pianoID(_ pianoID: PianoID, didSignInForToken token: String!, withError error: Error!) {
-        loginSucceeded(accessToken: token)
+    
+    func pianoID(_ pianoID: PianoID, didSignOutWithError error: Error!) {
+    }
+    
+    func pianoIDSignInDidCancel(_ pianoID: PianoID) {
+    }
+    
+    func pianoID(_ pianoID: PianoID, didSignInForToken token: PianoIDToken!, withError error: Error!) {
+        loginSucceeded(accessToken: token.accessToken)
     }
 }
 

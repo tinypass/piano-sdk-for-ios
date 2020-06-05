@@ -123,6 +123,7 @@
 				0D24ED541D0018F5001BE082 /* Resources */,
 				0D606A621D2143D90016FB4C /* Embed Frameworks */,
 				5AC1B716B6BF549C9B67E9C9 /* [CP] Embed Pods Frameworks */,
+				B386224FB008531030FDE0A4 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -211,17 +212,53 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-SampleSwiftApp/Pods-SampleSwiftApp-frameworks.sh",
-				"${PODS_ROOT}/PianoComposer/Frameworks/PianoComposer.framework",
-				"${PODS_ROOT}/PianoOAuth/Frameworks/PianoOAuth.framework",
+				"${BUILT_PRODUCTS_DIR}/AppAuth/AppAuth.framework",
+				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework",
+				"${BUILT_PRODUCTS_DIR}/FBSDKLoginKit/FBSDKLoginKit.framework",
+				"${BUILT_PRODUCTS_DIR}/GTMAppAuth/GTMAppAuth.framework",
+				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
+				"${BUILT_PRODUCTS_DIR}/PianoComposer/PianoComposer.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AppAuth.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKLoginKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMAppAuth.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PianoComposer.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PianoOAuth.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-SampleSwiftApp/Pods-SampleSwiftApp-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B386224FB008531030FDE0A4 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-SampleSwiftApp/Pods-SampleSwiftApp-resources.sh",
+				"${PODS_ROOT}/GoogleSignIn/Resources/GoogleSignIn.bundle",
+				"${PODS_ROOT}/PianoOAuth/Sources/OAuth/OAuth/Resources/piano_chevron.png",
+				"${PODS_ROOT}/PianoOAuth/Sources/OAuth/OAuth/Resources/piano_chevron@2x.png",
+				"${PODS_ROOT}/PianoOAuth/Sources/OAuth/OAuth/Resources/piano_chevron@3x.png",
+				"${PODS_ROOT}/PianoOAuth/Sources/OAuth/OAuth/Resources/piano_modal_close.png",
+				"${PODS_ROOT}/PianoOAuth/Sources/OAuth/OAuth/Resources/piano_modal_close@2x.png",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleSignIn.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/piano_chevron.png",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/piano_chevron@2x.png",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/piano_chevron@3x.png",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/piano_modal_close.png",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/piano_modal_close@2x.png",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-SampleSwiftApp/Pods-SampleSwiftApp-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */

@@ -10,8 +10,6 @@ class MainViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        PianoID.shared.delegate = self
     }
 
     override func didReceiveMemoryWarning() {
@@ -25,21 +23,12 @@ class MainViewController: UITableViewController {
                 navigationController?.pushViewController(vc, animated: true)
             }
         case 1:
-            switch indexPath.row {
-            case 0:
-                let vc = PianoOAuthPopupViewController(aid: PianoSettings.AID)
-                vc.delegate = self
-                vc.signUpEnabled = true
-                vc.widgetType = .login
-                vc.show()
-            case 1:
-                PianoID.shared.aid = PianoSettings.AID
-                PianoID.shared.signUpEnabled = true
-                PianoID.shared.widgetType = .login
-                PianoID.shared.signIn()
-            default:
-                break
-            }
+            PianoID.shared.delegate = self
+            PianoID.shared.googleClientId = "971267624263-dfmmc53ifbd23ajjjgfmo2m41diosopn.apps.googleusercontent.com"
+            PianoID.shared.aid = PianoSettings.AID
+            PianoID.shared.signUpEnabled = true
+            PianoID.shared.widgetType = .login
+            PianoID.shared.signIn()
         case 2:
             clearStoredData()
         case 3:
@@ -84,37 +73,26 @@ class MainViewController: UITableViewController {
     }
 }
 
-extension MainViewController: PianoOAuthDelegate {
-    func loginSucceeded(accessToken: String) {
-        self.accessToken = accessToken
-        showMessage(title: "OAuth", text: "Login succeeded\naccessToken = \(accessToken)")
-    }
-    
-    func loginCancelled() {
-        showMessage(title: "OAuth", text: "Login cancelled")
-    }
-}
-
 extension MainViewController: PianoIDDelegate {
     
-    func pianoID(_ pianoID: PianoID, didSignInForToken token: String!, withError error: Error!) {
+    func pianoID(_ pianoID: PianoID, didSignInForToken token: PianoIDToken!, withError error: Error!) {
         if let e = error {
             showMessage(title: "OAuth", text: "Login failed\nReason = \(e)")
         } else {
             if let token = token {
-                self.accessToken = token
-                showMessage(title: "OAuth", text: "Login succeeded\naccessToken = \(token)")
+                self.accessToken = token.accessToken
+                showMessage(title: "OAuth", text: "Login succeeded\naccessToken = \(token.accessToken)")
             }
         }
     }
     
-    func pianoID(_ pianoID: PianoID, didSignOutWithToken token: String, withError error: Error!) {
-        if let e = error {
-            showMessage(title: "OAuth", text: "Logout with token \naccessToken = \(token) \nfailed.\nReason:\(e)")
-        } else {
-            showMessage(title: "OAuth", text: "Logout with token \naccessToken = \(token) \ncompleted")
-        }
-    }
+    func pianoID(_ pianoID: PianoID, didSignOutWithError error: Error!) {
+       if let e = error {
+               showMessage(title: "OAuth", text: "Logout failed.\nReason:\(e)")
+           } else {
+               showMessage(title: "OAuth", text: "Logout completed")
+           }
+    }        
     
     func pianoIDSignInDidCancel(_ pianoID: PianoID) {
         showMessage(title: "OAuth", text: "Login cancelled")
