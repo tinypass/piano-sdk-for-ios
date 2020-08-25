@@ -17,6 +17,8 @@ public class ShowTemplateEventParams: NSObject {
     fileprivate(set) public var delayBy: DelayBy? = nil
     
     public let containerSelector: String
+
+    public var activityIndicatorBackgroundColor : UIColor? = nil
     
     public let showCloseButton: Bool
     
@@ -30,7 +32,8 @@ public class ShowTemplateEventParams: NSObject {
         displayMode = DisplayMode(name: (dict!["displayMode"] as? String ?? ""))
         containerSelector = dict!["containerSelector"] as? String ?? ""
         showCloseButton = dict!["showCloseButton"] as? Bool ?? false
-        
+        activityIndicatorBackgroundColor = UIColor(red: 56 / 255.0, green: 120 / 255.0, blue: 212 / 255.0, alpha: 1)
+
         if let delayByDict = dict!["delayBy"] as? [String: Any] {
             delayBy = DelayBy(dict: delayByDict)
         }
