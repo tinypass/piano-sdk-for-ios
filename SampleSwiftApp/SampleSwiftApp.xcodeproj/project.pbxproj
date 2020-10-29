@@ -123,7 +123,7 @@
 				0D24ED541D0018F5001BE082 /* Resources */,
 				0D606A621D2143D90016FB4C /* Embed Frameworks */,
 				5AC1B716B6BF549C9B67E9C9 /* [CP] Embed Pods Frameworks */,
-				B386224FB008531030FDE0A4 /* [CP] Copy Pods Resources */,
+				0A28C623F8DEA0E82A3112A6 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -183,6 +183,34 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		0A28C623F8DEA0E82A3112A6 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-SampleSwiftApp/Pods-SampleSwiftApp-resources.sh",
+				"${PODS_ROOT}/GoogleSignIn/Resources/GoogleSignIn.bundle",
+				"${PODS_ROOT}/PianoOAuth/Sources/OAuth/OAuth/Resources/piano_chevron.png",
+				"${PODS_ROOT}/PianoOAuth/Sources/OAuth/OAuth/Resources/piano_chevron@2x.png",
+				"${PODS_ROOT}/PianoOAuth/Sources/OAuth/OAuth/Resources/piano_chevron@3x.png",
+				"${PODS_ROOT}/PianoOAuth/Sources/OAuth/OAuth/Resources/piano_modal_close.png",
+				"${PODS_ROOT}/PianoOAuth/Sources/OAuth/OAuth/Resources/piano_modal_close@2x.png",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleSignIn.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/piano_chevron.png",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/piano_chevron@2x.png",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/piano_chevron@3x.png",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/piano_modal_close.png",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/piano_modal_close@2x.png",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-SampleSwiftApp/Pods-SampleSwiftApp-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		20DA08D39C3B637EE1F746B7 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -231,34 +259,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-SampleSwiftApp/Pods-SampleSwiftApp-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		B386224FB008531030FDE0A4 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-SampleSwiftApp/Pods-SampleSwiftApp-resources.sh",
-				"${PODS_ROOT}/GoogleSignIn/Resources/GoogleSignIn.bundle",
-				"${PODS_ROOT}/PianoOAuth/Sources/OAuth/OAuth/Resources/piano_chevron.png",
-				"${PODS_ROOT}/PianoOAuth/Sources/OAuth/OAuth/Resources/piano_chevron@2x.png",
-				"${PODS_ROOT}/PianoOAuth/Sources/OAuth/OAuth/Resources/piano_chevron@3x.png",
-				"${PODS_ROOT}/PianoOAuth/Sources/OAuth/OAuth/Resources/piano_modal_close.png",
-				"${PODS_ROOT}/PianoOAuth/Sources/OAuth/OAuth/Resources/piano_modal_close@2x.png",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleSignIn.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/piano_chevron.png",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/piano_chevron@2x.png",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/piano_chevron@3x.png",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/piano_modal_close.png",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/piano_modal_close@2x.png",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-SampleSwiftApp/Pods-SampleSwiftApp-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -418,7 +418,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEVELOPMENT_TEAM = W6L4RQ2JL6;
 				INFOPLIST_FILE = SampleSwiftApp/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = io.piano.SampleSwiftApp;
@@ -435,7 +435,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEVELOPMENT_TEAM = W6L4RQ2JL6;
 				INFOPLIST_FILE = SampleSwiftApp/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = io.piano.SampleSwiftApp;
