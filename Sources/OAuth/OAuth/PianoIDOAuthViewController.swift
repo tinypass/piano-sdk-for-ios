@@ -242,9 +242,7 @@ class PianoIDOAuthViewController: UIViewController {
     
     @objc
     func onCancelButtonTouch(_ sender: UIBarButtonItem) {
-        presentingViewController?.dismiss(animated: true, completion: {
-            PianoID.shared.signInCancel()
-        })
+        PianoID.shared.signInCancel()        
     }
     
     @objc
@@ -331,11 +329,17 @@ extension PianoIDOAuthViewController: WKNavigationDelegate {
 extension PianoIDOAuthViewController: WKUIDelegate {
             
     func webViewDidClose(_ webView: WKWebView) {
+        deinitWebView(webView)
+        
+        if webView == mainWebView {
+            PianoID.shared.signInCancel()
+            return
+        }
+        
         if webView == secondaryWebView {
             secondaryWebView = nil
         }
         
-        deinitWebView(webView)
         updateNavigationButtons()
         progressView.setProgress(0.0, animated: false)
         progressView.isHidden = false
@@ -401,12 +405,10 @@ extension PianoIDOAuthViewController: WKScriptMessageHandler {
             return
         }
                 
-        if let accessToken = json["accessToken"] as? String, let expiresIn = json["expiresIn"]as? Int64 {
+        if let accessToken = json["accessToken"] as? String {
             let refreshToken = json["refreshToken"] as? String ?? ""
-            let idToken = PianoIDToken(accessToken: accessToken, refreshToken: refreshToken, expiresIn: expiresIn)
-            presentingViewController?.dismiss(animated: true, completion: {
-                PianoID.shared.signInSuccess(idToken)
-            })
+            let idToken = PianoIDToken(accessToken: accessToken, refreshToken: refreshToken)
+            PianoID.shared.signInSuccess(idToken)
         }
     }
     
