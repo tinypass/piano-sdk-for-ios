@@ -17,6 +17,7 @@ public class PianoID: NSObject {
                 
     private let deploymentHostPath = "/api/v3/anon/mobile/sdk/id/deployment/host"
     private let authorizationPath = "/id/api/v1/identity/vxauth/authorize"
+    private let passwordlessPath = "/id/api/v1/identity/passwordless/authorization/code"
     private let tokenPath = "/id/api/v1/identity/oauth/token"
     private let logoutPath = "/id/api/v1/identity/logout"
     
@@ -25,6 +26,7 @@ public class PianoID: NSObject {
     public var aid: String = ""
     public var isSandbox = false
     public var endpointUrl: String = ""
+    public var deploymentHost: String = ""
     public var signUpEnabled = false
     public var widgetType: WidgetType = .login    
     public var presentingViewController: UIViewController?
@@ -44,14 +46,6 @@ public class PianoID: NSObject {
     private var redirectURI: String {
         get {
             return "\(redirectScheme)\(urlSchemePath)"
-        }
-    }
-    
-    private var idHost: String {
-        if endpointUrl.isEmpty {
-            return isSandbox ? sandbox : idProd
-        } else {
-            return endpointUrl
         }
     }
     
@@ -98,56 +92,98 @@ public class PianoID: NSObject {
         })
     }
     
-    public func signOut(token: String) {
-        if let url = prepareSignOutUrl(host: idHost, token: token) {
-            var request = URLRequest(url: url)
-            request.httpMethod = "GET"
-            
-            let dataTask = urlSession.dataTask(with: request) { (data, response, error) in
-                if error == nil, let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 {
-                    self.signOutSuccess()
-                } else {
-                    self.signOutFail()
-                }
-            }
-            
-            dataTask.resume()
-        }
-    }
-    
-    public func refreshToken(_ refreshToken: String, completion: @escaping(PianoIDToken?, PianoIDError?) -> Void) {
-        if let url = prepareRefreshTokenUrl(host: idHost) {
-            let body: [String: Any] = [
-                "client_id": getAID(),
-                "grant_type": "refresh_token",
-                "refresh_token": refreshToken
-            ]
-        
-            var request = URLRequest(url: url)
-            request.httpMethod = "POST"
-            request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-            request.httpBody = JSONSerializationUtil.serializeObjectToJSONData(object: body)
-            let dataTask = urlSession.dataTask(with: request) { (data, response, error) in
-                if error == nil, let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200, let responseData = data {
-                    if let responseObject = JSONSerializationUtil.deserializeResponse(response: response!, responseData: responseData) {
-                        if let accessToken = responseObject["access_token"] as? String,
-                            let refreshToken = responseObject["refresh_token"] as? String,
-                            let expiresIn = responseObject["expires_in"] as? Int64 {
-                            
-                            completion(PianoIDToken(accessToken: accessToken, refreshToken: refreshToken, expiresIn: expiresIn), nil)
+    fileprivate func passwordlessSignIn(code: String) {
+        getDeploymentHost { (host) in
+            if let url = self.preparePasswrodlessUrl(host: host, code: code) {
+                var request = URLRequest(url: url)
+                request.httpMethod = "POST"
+                request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+                let dataTask = self.urlSession.dataTask(with: request) { (data, response, error) in
+                    if error == nil, let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200, let responseData = data {
+                        if let token = self.parseToken(response: response!, responseData: responseData) {
+                            self.signInSuccess(token)
                             return
                         }
                     }
                 }
-                                
-                completion(nil, PianoIDError.refreshFailed)
+                
+                dataTask.resume()
             }
-            
-            dataTask.resume()
+        } fail: {
+            self.signInFail(.cannotGetDeploymentHost)
         }
     }
     
-    private func getDeploymentHost(success: @escaping (String) -> Void, fail: @escaping () -> Void) {
+    public func signOut(token: String) {
+        getDeploymentHost { (host) in
+            if let url = self.prepareSignOutUrl(host: host, token: token) {
+                var request = URLRequest(url: url)
+                request.httpMethod = "GET"
+                
+                let dataTask = self.urlSession.dataTask(with: request) { (data, response, error) in
+                    if error == nil, let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 {
+                        self.signOutSuccess()
+                    } else {
+                        self.signOutFail()
+                    }
+                }
+                
+                dataTask.resume()
+            }
+        } fail: {
+            self.signOutFail()
+        }
+    }
+    
+    public func refreshToken(_ refreshToken: String, completion: @escaping(PianoIDToken?, PianoIDError?) -> Void) {
+        getDeploymentHost { (host) in
+            if let url = self.prepareRefreshTokenUrl(host: host) {
+                let body: [String: Any] = [
+                    "client_id": self.getAID(),
+                    "grant_type": "refresh_token",
+                    "refresh_token": refreshToken
+                ]
+            
+                var request = URLRequest(url: url)
+                request.httpMethod = "POST"
+                request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+                request.httpBody = JSONSerializationUtil.serializeObjectToJSONData(object: body)
+                let dataTask = self.urlSession.dataTask(with: request) { (data, response, error) in
+                    if error == nil, let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200, let responseData = data {
+                        if let token = self.parseToken(response: response!, responseData: responseData) {
+                            completion(token, nil)
+                            return
+
+                        }
+                    }
+                                    
+                    completion(nil, PianoIDError.refreshFailed)
+                }
+                
+                dataTask.resume()
+            }
+        } fail: {
+            completion(nil, PianoIDError.cannotGetDeploymentHost)
+        }
+    }
+    
+    fileprivate func parseToken(response: URLResponse, responseData: Data) -> PianoIDToken? {
+        if let responseObject = JSONSerializationUtil.deserializeResponse(response: response, responseData: responseData) {
+            if let accessToken = responseObject["access_token"] as? String,
+                let refreshToken = responseObject["refresh_token"] as? String {
+                return PianoIDToken(accessToken: accessToken, refreshToken: refreshToken)
+            }
+        }
+        
+        return .none
+    }
+    
+    fileprivate func getDeploymentHost(success: @escaping (String) -> Void, fail: @escaping () -> Void) {
+        guard deploymentHost.isEmpty else {
+            success(deploymentHost)
+            return
+        }
+        
         if let url = prepareDeploymentHostUrl(host: apiHost) {
             var request = URLRequest(url: url)
             request.httpMethod = "GET"
@@ -186,7 +222,9 @@ public class PianoID: NSObject {
             URLQueryItem(name: "client_id", value: getAID()),
             URLQueryItem(name: "screen", value: widgetType.description),
             URLQueryItem(name: "disable_sign_up", value: "\(!signUpEnabled)"),
-            URLQueryItem(name: "response_type", value: "token")
+            URLQueryItem(name: "response_type", value: "token"),
+            URLQueryItem(name: "is_sdk", value: "\(true)"),
+            URLQueryItem(name: "redirect_uri", value: redirectURI),
         ]
         
         var nativeOAuthProviders: [String] = []
@@ -203,6 +241,21 @@ public class PianoID: NSObject {
         
         urlComponents.path = authorizationPath
         urlComponents.queryItems = queryItems
+        return urlComponents.url
+    }
+    
+    private func preparePasswrodlessUrl(host: String, code: String) -> URL? {
+        guard var urlComponents = URLComponents(string: host) else {
+            return nil
+        }
+        
+        let queryItems: [URLQueryItem] = [
+            URLQueryItem(name: "aid", value: getAID()),
+            URLQueryItem(name: "passwordless_token", value: code)
+        ]
+        
+        urlComponents.queryItems = queryItems
+        urlComponents.path = passwordlessPath
         return urlComponents.url
     }
         
@@ -266,11 +319,15 @@ public class PianoID: NSObject {
         
         if let urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false), let queryParams = urlComponents.queryItems {
             if let accessToken = queryParams.first(where: {$0.name == "access_token"})?.value,
-                let refreshToken = queryParams.first(where: {$0.name == "refresh_token"})?.value,
-                let expiresIn = Int64(queryParams.first(where: {$0.name == "expires_in"})?.value ?? "") {
+                let refreshToken = queryParams.first(where: {$0.name == "refresh_token"})?.value {
              
-                let token = PianoIDToken(accessToken: accessToken, refreshToken: refreshToken, expiresIn: expiresIn)
+                let token = PianoIDToken(accessToken: accessToken, refreshToken: refreshToken)
                 signInSuccess(token)
+                return true
+            }
+            
+            if let code = queryParams.first(where: {$0.name == "code"})?.value {
+                passwordlessSignIn(code: code)
                 return true
             }
         }
@@ -282,19 +339,37 @@ public class PianoID: NSObject {
         _currentToken = token
         _ = PianoIDTokenStorage.shared.saveToken(token, aid: getAID())
         DispatchQueue.main.async {
-            self.delegate?.pianoID(self, didSignInForToken: token, withError: nil)
+            if let vc = self.authViewController, let presentingViewController = vc.presentingViewController {
+                presentingViewController.dismiss(animated: true, completion: {
+                    self.delegate?.pianoID(self, didSignInForToken: token, withError: nil)
+                })
+            } else {
+                self.delegate?.pianoID(self, didSignInForToken: token, withError: nil)
+            }
         }
     }
     
     internal func signInFail(_ error: PianoIDError!) {
         DispatchQueue.main.async {
-            self.delegate?.pianoID(self, didSignInForToken: nil, withError: error)
+            if let vc = self.authViewController, let presentingViewController = vc.presentingViewController {
+                presentingViewController.dismiss(animated: true, completion: {
+                    self.delegate?.pianoID(self, didSignInForToken: nil, withError: error)
+                })
+            } else {
+                self.delegate?.pianoID(self, didSignInForToken: nil, withError: error)
+            }
         }
     }        
     
     internal func signInCancel() {
         DispatchQueue.main.async {
-            self.delegate?.pianoIDSignInDidCancel(self)
+            if let vc = self.authViewController, let presentingViewController = vc.presentingViewController {
+                presentingViewController.dismiss(animated: true, completion: {
+                    self.delegate?.pianoIDSignInDidCancel(self)
+                })
+            } else {
+                self.delegate?.pianoIDSignInDidCancel(self)
+            }
         }
     }
     

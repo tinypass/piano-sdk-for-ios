@@ -29,7 +29,7 @@ public class XpEventExecutionContext: NSObject {
         currentMeterName = dict["currentMeterName"] as? String ?? ""
         region = dict["region"] as? String ?? ""
         countryCode = dict["countryCode"] as? String ?? ""
-        
+            
         splitTestEntries = Array<SplitTestEntry>()
         if let splitTestArray = dict["splitTests"] as? [Any] {
             for item in splitTestArray {

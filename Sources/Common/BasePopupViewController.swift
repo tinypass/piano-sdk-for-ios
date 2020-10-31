@@ -21,6 +21,10 @@ public class BasePopupViewController: UIViewController {
         closeButton.autoresizingMask = [.flexibleLeftMargin]
         closeButton.addTarget(self, action: #selector(closeButtonTouchUpInside), for: .touchUpInside)
         view.addSubview(closeButton)
+        
+        if #available(iOS 13.0, *) {
+            self.isModalInPresentation = true
+        }
     }
     
     public func show() {

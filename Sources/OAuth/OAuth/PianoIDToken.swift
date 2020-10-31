@@ -12,31 +12,30 @@ public class PianoIDToken: NSObject, NSCoding {
         return expirationDate > Date()
     }
     
-    private init(accessToken: String, refreshToken: String, expiresIn: Int64, expirationDate: Date) {
+    public init(accessToken: String, refreshToken: String) {
         self.accessToken = accessToken
         self.refreshToken = refreshToken
-        self.expiresIn = expiresIn
-        self.expirationDate = expirationDate
-    }
-    
-    public convenience init(accessToken: String, refreshToken: String, expiresIn: Int64) {
-        let expirationDate = Date().addingTimeInterval(Double(expiresIn))
-        self.init(accessToken: accessToken, refreshToken: refreshToken, expiresIn: expiresIn, expirationDate: expirationDate)
+                
+        do {
+            let jwt = try decode(jwt: accessToken)
+            self.expiresIn = Int64(jwt.expiresAt?.timeIntervalSince1970 ?? 0)
+            self.expirationDate = jwt.expiresAt ?? Date(timeIntervalSince1970: 0)
+        } catch {
+            print("Cannot parse JWT token: \(error)")
+            self.expiresIn = 0
+            self.expirationDate = Date(timeIntervalSince1970: 0)
+        }
     }
     
     public required convenience init?(coder: NSCoder) {
         let accessToken = coder.decodeObject(forKey: "access_token") as! String
         let refreshToken = coder.decodeObject(forKey: "refresh_token") as! String
-        let expiresIn = coder.decodeInt64(forKey: "expires_in")
-        let expirationDate = coder.decodeObject(forKey: "expiration_date") as! Date
         
-        self.init(accessToken: accessToken, refreshToken: refreshToken, expiresIn: expiresIn, expirationDate: expirationDate)
+        self.init(accessToken: accessToken, refreshToken: refreshToken)
     }
     
     public func encode(with coder: NSCoder) {
         coder.encode(accessToken, forKey: "access_token")
         coder.encode(refreshToken, forKey: "refresh_token")
-        coder.encode(expiresIn, forKey: "expires_in")
-        coder.encode(expirationDate, forKey: "expiration_date")
     }           
 }

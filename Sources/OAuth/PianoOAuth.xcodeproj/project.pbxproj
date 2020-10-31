@@ -9,6 +9,8 @@
 /* Begin PBXFileReference section */
 		0D0EC6032418B98300E0F174 /* PianoIDApplicationDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PianoIDApplicationDelegate.swift; sourceTree = "<group>"; };
 		0D28E09424506F140013CFDA /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
+		0D32BCA3254AA19700A1A94B /* JWTDecode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JWTDecode.swift; sourceTree = "<group>"; };
+		0D32BCB5254AA31600A1A94B /* JWT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JWT.swift; sourceTree = "<group>"; };
 		0D466A4324192F5900EF1550 /* piano_modal_close@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "piano_modal_close@2x.png"; sourceTree = "<group>"; };
 		0D466A4424192F5900EF1550 /* piano_modal_close.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = piano_modal_close.png; sourceTree = "<group>"; };
 		0D48569E243C995600A1E5B8 /* PianoIDTokenStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PianoIDTokenStorage.swift; sourceTree = "<group>"; };
@@ -90,6 +92,8 @@
 				0D9AA360244495F80010D868 /* SocialOAuthProvider.swift */,
 				D7ADF9C81DABDA7900D7DE7A /* WidgetType.swift */,
 				0D28E09424506F140013CFDA /* String+Extension.swift */,
+				0D32BCA3254AA19700A1A94B /* JWTDecode.swift */,
+				0D32BCB5254AA31600A1A94B /* JWT.swift */,
 			);
 			name = Src;
 			path = OAuth;
@@ -173,8 +177,8 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				MARKETING_VERSION = 2.3.8;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MARKETING_VERSION = 2.3.9;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -230,8 +234,8 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				MARKETING_VERSION = 2.3.8;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MARKETING_VERSION = 2.3.9;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				ONLY_ACTIVE_ARCH = NO;
 				SDKROOT = iphoneos;
