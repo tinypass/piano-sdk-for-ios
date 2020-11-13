@@ -207,7 +207,7 @@ func application(_ application: UIApplication, didFinishLaunchingWithOptions lau
 Also you should configure your application as described here: https://developers.facebook.com/docs/swift/register-your-app#configuresettings
 
 ##### Passwordless Login in SDK
-These settings should be configured in Piano ID according to https://docs.piano.io/enabling-passwordless-checkout/. The current configuration is applied in mobile application without additional settings (edited) 
+These settings should be configured in Piano ID according to https://docs.piano.io/enabling-passwordless-checkout/. The current configuration is applied in mobile application without additional settings 
 
 ##### PianoIDDelegate protocol
 ```swift
