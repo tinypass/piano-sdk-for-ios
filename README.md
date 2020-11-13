@@ -139,7 +139,7 @@ func loginCancelled()
 ##### Piano ID
 PianoID requires a custom URL Scheme to be added to your project. To add: open your project configuration select your app from the TARGETS section, then select the Info tab, and expand the URL Types section. 
 
-Set ```io.piano.id..<PUBLISHER_AID_LOWERCASE>```
+Set ```io.piano.id.<PUBLISHER_AID_LOWERCASE>```
 as URL schemes. For example:
 <img src="./Images/url_types.png" alt="Url scheme example" width="446"/>
 
@@ -205,6 +205,9 @@ func application(_ application: UIApplication, didFinishLaunchingWithOptions lau
 }
 ```
 Also you should configure your application as described here: https://developers.facebook.com/docs/swift/register-your-app#configuresettings
+
+##### Passwordless Login in SDK
+These settings should be configured in Piano ID according to https://docs.piano.io/enabling-passwordless-checkout/. The current configuration is applied in mobile application without additional settings (edited) 
 
 ##### PianoIDDelegate protocol
 ```swift
