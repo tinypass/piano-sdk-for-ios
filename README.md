@@ -185,7 +185,6 @@ PianoID.shared.signUpEnabled = false // for enabling/disabling signUp
 You must implement the ```application(_:didFinishLaunchingWithOptions:)``` method of your app delegate
 ```swift
 func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-    PianoID.shared.useNativeGoogleSignInSDK = true
     PianoID.shared.googleClientId = "<PUBLISHER_GOOGLE_CLIENT_ID>"    
     return true
 }
@@ -199,7 +198,6 @@ Also you should configure URL scheme as described here:  https://developers.goog
 You must implement the ```application(_:didFinishLaunchingWithOptions:)``` method of your app delegate
 ```swift
 func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {    
-    PianoID.shared.useNativeFacebookSignInSDK = true
     PianoOAuth.PianoIDApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
     return true
 }
