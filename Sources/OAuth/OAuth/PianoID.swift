@@ -93,78 +93,84 @@ public class PianoID: NSObject {
     }
     
     fileprivate func passwordlessSignIn(code: String) {
-        getDeploymentHost { (host) in
-            if let url = self.preparePasswrodlessUrl(host: host, code: code) {
-                var request = URLRequest(url: url)
-                request.httpMethod = "POST"
-                request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-                let dataTask = self.urlSession.dataTask(with: request) { (data, response, error) in
-                    if error == nil, let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200, let responseData = data {
-                        if let token = self.parseToken(response: response!, responseData: responseData) {
-                            self.signInSuccess(token)
-                            return
+        getDeploymentHost(
+            success: { (host) in
+                if let url = self.preparePasswrodlessUrl(host: host, code: code) {
+                    var request = URLRequest(url: url)
+                    request.httpMethod = "POST"
+                    request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+                    let dataTask = self.urlSession.dataTask(with: request) { (data, response, error) in
+                        if error == nil, let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200, let responseData = data {
+                            if let token = self.parseToken(response: response!, responseData: responseData) {
+                                self.signInSuccess(token)
+                                return
+                            }
                         }
                     }
+                    
+                    dataTask.resume()
                 }
-                
-                dataTask.resume()
-            }
-        } fail: {
-            self.signInFail(.cannotGetDeploymentHost)
-        }
+            },
+            fail: {
+                self.signInFail(.cannotGetDeploymentHost)
+        })
     }
     
     public func signOut(token: String) {
-        getDeploymentHost { (host) in
-            if let url = self.prepareSignOutUrl(host: host, token: token) {
-                var request = URLRequest(url: url)
-                request.httpMethod = "GET"
-                
-                let dataTask = self.urlSession.dataTask(with: request) { (data, response, error) in
-                    if error == nil, let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 {
-                        self.signOutSuccess()
-                    } else {
-                        self.signOutFail()
+        getDeploymentHost(
+            success: { (host) in
+                if let url = self.prepareSignOutUrl(host: host, token: token) {
+                    var request = URLRequest(url: url)
+                    request.httpMethod = "GET"
+                    
+                    let dataTask = self.urlSession.dataTask(with: request) { (data, response, error) in
+                        if error == nil, let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 {
+                            self.signOutSuccess()
+                        } else {
+                            self.signOutFail()
+                        }
                     }
+                    
+                    dataTask.resume()
                 }
-                
-                dataTask.resume()
-            }
-        } fail: {
-            self.signOutFail()
-        }
+            },
+            fail: {
+                self.signOutFail()
+        })
     }
     
     public func refreshToken(_ refreshToken: String, completion: @escaping(PianoIDToken?, PianoIDError?) -> Void) {
-        getDeploymentHost { (host) in
-            if let url = self.prepareRefreshTokenUrl(host: host) {
-                let body: [String: Any] = [
-                    "client_id": self.getAID(),
-                    "grant_type": "refresh_token",
-                    "refresh_token": refreshToken
-                ]
-            
-                var request = URLRequest(url: url)
-                request.httpMethod = "POST"
-                request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-                request.httpBody = JSONSerializationUtil.serializeObjectToJSONData(object: body)
-                let dataTask = self.urlSession.dataTask(with: request) { (data, response, error) in
-                    if error == nil, let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200, let responseData = data {
-                        if let token = self.parseToken(response: response!, responseData: responseData) {
-                            completion(token, nil)
-                            return
-
-                        }
-                    }
-                                    
-                    completion(nil, PianoIDError.refreshFailed)
-                }
+        getDeploymentHost(
+            success: { (host) in
+                if let url = self.prepareRefreshTokenUrl(host: host) {
+                    let body: [String: Any] = [
+                        "client_id": self.getAID(),
+                        "grant_type": "refresh_token",
+                        "refresh_token": refreshToken
+                    ]
                 
-                dataTask.resume()
-            }
-        } fail: {
-            completion(nil, PianoIDError.cannotGetDeploymentHost)
-        }
+                    var request = URLRequest(url: url)
+                    request.httpMethod = "POST"
+                    request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+                    request.httpBody = JSONSerializationUtil.serializeObjectToJSONData(object: body)
+                    let dataTask = self.urlSession.dataTask(with: request) { (data, response, error) in
+                        if error == nil, let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200, let responseData = data {
+                            if let token = self.parseToken(response: response!, responseData: responseData) {
+                                completion(token, nil)
+                                return
+
+                            }
+                        }
+                                        
+                        completion(nil, PianoIDError.refreshFailed)
+                    }
+                    
+                    dataTask.resume()
+                }
+            },
+            fail: {
+                completion(nil, PianoIDError.cannotGetDeploymentHost)
+        })
     }
     
     fileprivate func parseToken(response: URLResponse, responseData: Data) -> PianoIDToken? {
