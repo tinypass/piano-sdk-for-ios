@@ -1,5 +1,6 @@
 import Foundation
 
+@@objcMembers
 public class ShowLoginEventParams: NSObject {
     
     public let userProvider: String
