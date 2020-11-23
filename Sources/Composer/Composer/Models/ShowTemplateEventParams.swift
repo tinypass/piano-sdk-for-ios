@@ -1,5 +1,6 @@
 import Foundation
 
+@objcMembers
 public class ShowTemplateEventParams: NSObject {
 
     public let templateId: String
