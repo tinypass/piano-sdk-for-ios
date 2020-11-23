@@ -1,5 +1,6 @@
 import Foundation
 
+@objcMembers
 public class XpEvent: NSObject {
     
     public let eventType: String
