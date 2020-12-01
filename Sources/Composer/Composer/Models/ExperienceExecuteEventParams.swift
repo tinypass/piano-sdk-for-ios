@@ -1,5 +1,6 @@
 import Foundation
 
+@objcMembers
 public class ExperienceExecuteEventParams: NSObject {
     
     fileprivate(set) public var accessList: Array<XpAccessItem>

@@ -1,5 +1,6 @@
 import Foundation
 
+@objcMembers
 public class PageViewMeterEventParams: NSObject {
     
     public let meterName: String

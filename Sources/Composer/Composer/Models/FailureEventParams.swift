@@ -1,5 +1,6 @@
 import Foundation
 
+@objcMembers
 public class FailureEventParams: NSObject {
     
     public let moduleId: String

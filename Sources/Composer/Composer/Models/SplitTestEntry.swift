@@ -1,5 +1,6 @@
 import Foundation
 
+@objcMembers
 public class SplitTestEntry: NSObject {
     
     public let splitTestVariantId: String

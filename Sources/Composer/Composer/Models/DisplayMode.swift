@@ -1,6 +1,7 @@
 import Foundation
 
-@objc public enum DisplayMode: Int {
+@objc
+public enum DisplayMode: Int {
     
     case inline
     case modal

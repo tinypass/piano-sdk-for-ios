@@ -1,5 +1,6 @@
 import Foundation
 
+@objcMembers
 public class User: NSObject {
  
     public let uid: String

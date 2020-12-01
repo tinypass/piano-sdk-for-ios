@@ -1,6 +1,7 @@
 import Foundation
 
-@objc public enum DelayType: Int {
+@objc
+public enum DelayType: Int {
     
     case time
     case scroll

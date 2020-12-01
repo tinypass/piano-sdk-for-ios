@@ -1,5 +1,6 @@
 import Foundation
 
+@objcMembers
 public class ServerError: NSObject {
     
     public let field: String

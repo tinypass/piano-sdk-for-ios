@@ -1,5 +1,6 @@
 import Foundation
 
+@objcMembers
 public class DelayBy: NSObject {
 
     public let type: DelayType

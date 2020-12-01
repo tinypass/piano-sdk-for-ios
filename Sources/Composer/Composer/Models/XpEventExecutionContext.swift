@@ -1,5 +1,6 @@
 import Foundation
 
+@objcMembers
 public class XpEventExecutionContext: NSObject {
     
     public let experienceId: String

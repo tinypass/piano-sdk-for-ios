@@ -1,5 +1,6 @@
 import Foundation
 
+@objcMembers
 public class XpAccessItem: NSObject {
 
     public let rid: String

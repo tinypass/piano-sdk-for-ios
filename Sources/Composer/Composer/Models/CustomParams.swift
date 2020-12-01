@@ -1,5 +1,6 @@
 import Foundation
 
+@objcMembers
 public class CustomParams: NSObject {
     
     private var content: Dictionary<String, Array<String>> = Dictionary<String, Array<String>>()

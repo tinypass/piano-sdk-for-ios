@@ -1,5 +1,6 @@
 import Foundation
 
+@objcMembers
 public class XpEventModuleParams: NSObject {
     
     public let moduleId: String

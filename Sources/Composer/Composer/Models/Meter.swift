@@ -1,5 +1,6 @@
 import Foundation
 
+@objcMembers
 public class Meter: NSObject {
     
     public let meterName: String
