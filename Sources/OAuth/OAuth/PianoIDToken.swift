@@ -9,7 +9,7 @@ public class PianoIDToken: NSObject, NSCoding {
     public let expirationDate: Date
     
     public var isExpired: Bool {
-        return expirationDate > Date()
+        return expirationDate <= Date()
     }
     
     public init(accessToken: String, refreshToken: String) {

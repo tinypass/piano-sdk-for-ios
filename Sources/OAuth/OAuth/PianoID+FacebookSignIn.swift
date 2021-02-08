@@ -20,7 +20,11 @@ extension PianoID {
         case .failed(let error):
             handleFacebookError(error)
         case .success(_, _, let token):
-            handleFacebook(token: token.tokenString)
+            guard let tokenString = token?.tokenString else {
+                signInFail(.facebookSignInFailed)
+                return
+            }
+            handleFacebook(token: tokenString)
         }
     }
     
