@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = 'PianoOAuth'
-  s.version      = '2.3.11'
+  s.version      = '2.3.12'
   s.swift_version = '5.0'
   s.summary      = 'Enables iOS apps to sign in with Piano.io'
   s.homepage     = 'https://github.com/tinypass/piano-sdk-for-ios'
@@ -10,9 +10,10 @@ Pod::Spec.new do |s|
   s.source       = { :git => 'https://github.com/tinypass/piano-sdk-for-ios.git', :tag => "#{s.version}" }
   s.resources = "Sources/OAuth/OAuth/Resources/*.png"
   s.source_files = 'Sources/Common/*.swift', 'Sources/OAuth/OAuth/**/*.swift', 'Sources/OAuth/OAuth/**/*.h'
+  s.static_framework = true
   s.pod_target_xcconfig = { 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64' }
   s.user_target_xcconfig = { 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64' }
-  s.static_framework = true
   s.dependency 'GoogleSignIn', '~> 5.0'
   s.dependency 'FBSDKLoginKit', '~> 9.0'
+  
 end

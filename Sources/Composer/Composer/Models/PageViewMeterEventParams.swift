@@ -12,7 +12,9 @@ public class PageViewMeterEventParams: NSObject {
     fileprivate(set) public var maxViews: Int = 0
     
     fileprivate(set) public var totalViews: Int = 0
-    
+
+    fileprivate(set) public var incremented: Bool = false
+
     init?(dict: [String: Any]?) {
         if dict == nil {
             return nil
@@ -23,5 +25,6 @@ public class PageViewMeterEventParams: NSObject {
         viewsLeft = dict!["viewsLeft"] as? Int ?? 0
         maxViews = dict!["maxViews"] as? Int ?? 0
         totalViews = dict!["totalViews"] as? Int ?? 0
+        incremented = dict!["incremented"] as? Bool ?? false
     }
 }
