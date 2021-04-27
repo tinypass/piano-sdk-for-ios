@@ -48,6 +48,21 @@ import PianoComposer
 @import PianoComposer;
 ```
 
+##### Endpoints
+```swift
+PianoEndpoint.production // Production endpoint
+PianoEndpoint.productionAustralia // Production endpoint for Australia region
+PianoEndpoint.productionAsiaPacific // Production endpoint for Asia/Pacific region
+PianoEndpoint.sandbox // Sandbox endpoint
+```
+
+##### Initialize
+```swift
+PianoComposer(aid: "<PUBLISHER_AID>") // Production endpoint is used by default (PianoEndpoint.production)
+// or
+PianoComposer(aid: "<PUBLISHER_AID>", endpoint: PianoEndpoint.sandbox)
+```
+
 ##### Usage
 ```swift
 var composer = PianoComposer(aid: "<PUBLISHER_AID>")
@@ -60,16 +75,6 @@ var composer = PianoComposer(aid: "<PUBLISHER_AID>")
 .url("http://pubsite.com/page1") // set url
 .customVariable(name: "customId", value: "1") // set custom variable
 .userToken("userToken") // set user token
-```
-
-##### Switch to sandbox
-```swift
-let composer = PianoComposer(aid: "<PUBLISHER_AID>", sandbox: true)
-// or
-let composer = PianoComposer(aid: "<PUBLISHER_AID>", endpointUrl: PianoComposer.sandboxEndpointUrl)
-// or
-let composer = PianoComposer(aid: "<PUBLISHER_AID>")
-composer.endpointUrl(endpointUrl: PianoComposer.sandboxEndpointUrl)
 ```
 
 ##### Composer execution
