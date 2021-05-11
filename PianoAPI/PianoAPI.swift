@@ -218,7 +218,7 @@ public class PianoAPI: NSObject {
 
             req.httpMethod = method.rawValue
 
-            session.dataTask(with: req) { [self] (data, response, error) in
+            session.dataTask(with: req) { (data, response, error) in
                 if let e = error {
                     completion(nil, e)
                     return
