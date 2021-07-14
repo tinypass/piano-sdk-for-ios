@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = 'PianoComposer'
-  s.version      = '2.3.12'
+  s.version      = '2.3.13'
   s.swift_version = '5.0'
   s.summary      = 'Enables iOS apps to use mobile composer by Piano.io'
   s.homepage     = 'https://github.com/tinypass/piano-sdk-for-ios'

@@ -1,5 +1,9 @@
 # Piano SDK for iOS
 
+## v2.3,13
+* [Piano ID] Added email confirmation flag
+* [Piano ID] Fix problems problem with saved cookies
+
 ## v2.3.12
 
 * Changed endpoint structure for PianoComposer

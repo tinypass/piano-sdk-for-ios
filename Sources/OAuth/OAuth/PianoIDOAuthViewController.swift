@@ -119,6 +119,7 @@ class PianoIDOAuthViewController: UIViewController {
         config.preferences.javaScriptEnabled = true
         config.preferences.javaScriptCanOpenWindowsAutomatically = false
         config.userContentController = webViewContentController
+        config.websiteDataStore = WKWebsiteDataStore.nonPersistent()
 
         let webView = WKWebView(frame: .zero, configuration: config)
         webView.navigationDelegate = self
