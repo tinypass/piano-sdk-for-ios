@@ -2,7 +2,7 @@
 
 ## v2.3,13
 * [Piano ID] Added email confirmation flag
-* [Piano ID] Fix problems problem with saved cookies
+* [Piano ID] Fix problems with saved cookies
 
 ## v2.3.12
 
