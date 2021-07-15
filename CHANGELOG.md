@@ -1,6 +1,6 @@
 # Piano SDK for iOS
 
-## v2.3,13
+## v2.3.13
 * [Piano ID] Added email confirmation flag
 * [Piano ID] Fix problems with saved cookies
 
