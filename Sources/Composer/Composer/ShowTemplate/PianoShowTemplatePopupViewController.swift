@@ -5,7 +5,6 @@ import WebKit
 public class PianoShowTemplatePopupViewController: BasePopupViewController {
     
     fileprivate let indicatorSize: CGFloat = 50
-    fileprivate let blueColor = UIColor(red: 56 / 255.0, green: 120 / 255.0, blue: 212 / 255.0, alpha: 1)
     
     public var webView: WKWebView!
     public var activityIndicator: UIActivityIndicatorView!
@@ -54,7 +53,7 @@ public class PianoShowTemplatePopupViewController: BasePopupViewController {
                                                                   height: indicatorSize))
         activityIndicator.autoresizingMask = [.flexibleLeftMargin, .flexibleTopMargin, .flexibleBottomMargin, .flexibleRightMargin]
         activityIndicator.layer.cornerRadius = 4
-        activityIndicator.backgroundColor = blueColor
+        activityIndicator.backgroundColor = self.showTemplateParams.activityIndicatorBackgroundColor
         
         view.addSubview(webView)
         view.addSubview(activityIndicator)
@@ -133,7 +132,7 @@ extension PianoShowTemplatePopupViewController: WKNavigationDelegate {
 }
 
 extension PianoShowTemplatePopupViewController: WKScriptMessageHandler {
-    public func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {                
+    public func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
         let handlerType = JSMessageHandlerType.fromString(value: message.name)
         DispatchQueue.main.async {
             switch handlerType {
