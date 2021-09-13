@@ -16,19 +16,23 @@ fileprivate enum EventType: Int {
 public class PianoEndpoint: NSObject {
 
     public static var production: PianoEndpoint {
-        PianoEndpoint(api: "https://buy.piano.io", composer: "https://experience.piano.io")
+        PianoEndpoint(api: "https://buy.piano.io", composer: "https://c2.piano.io")
+    }
+    
+    public static var productionEurope: PianoEndpoint {
+        PianoEndpoint(api: "https://buy-eu.piano.io", composer: "https://c2-eu.piano.io")
     }
 
     public static var productionAustralia: PianoEndpoint {
-        PianoEndpoint(api: "https://buy-au.piano.io", composer: "https://experience-au.piano.io")
+        PianoEndpoint(api: "https://buy-au.piano.io", composer: "https://c2-au.piano.io")
     }
 
     public static var productionAsiaPacific: PianoEndpoint {
-        PianoEndpoint(api: "https://buy-ap.piano.io", composer: "https://experience-ap.piano.io")
+        PianoEndpoint(api: "https://buy-ap.piano.io", composer: "https://c2-ap.piano.io")
     }
 
     public static var sandbox: PianoEndpoint {
-        PianoEndpoint(url: "https://sandbox.piano.io")
+        PianoEndpoint(api: "https://sandbox.piano.io", composer: "https://c2.sandbox.piano.io")
     }
 
     public let api: String
@@ -44,8 +48,21 @@ public class PianoEndpoint: NSObject {
     }
 }
 
+@objc
+public protocol PianoComposerInterceptor {
+    
+    @objc init(composer: PianoComposer) throws
+    @objc optional func executed(composer: PianoComposer, params: [String:Any]?)
+}
+
 @objcMembers
 public class PianoComposer: NSObject {
+    
+    private static var interceptorTypes: [PianoComposerInterceptor.Type] = []
+    
+    public static func enable<T: PianoComposerInterceptor>(interceptorType: T.Type) {
+        interceptorTypes.append(interceptorType)
+    }
 
     public static let pianoIdUserProviderName = "piano_id"
 
@@ -65,12 +82,14 @@ public class PianoComposer: NSObject {
     fileprivate let executeAction = "/xbuilder/experience/executeMobile"
     fileprivate let showTemplateAction = "/checkout/template/show"
 
+    fileprivate var interceptors: [PianoComposerInterceptor] = []
     fileprivate var session: URLSession
     fileprivate var dataTask: URLSessionDataTask?
 
     public let aid: String
     public let protocolVersion: Int = 1
     public let submitType: String = "manual"
+    public let pageViewId = ComposerHelper.generatePageViewId()
     public var endpoint: PianoEndpoint
     public var tags: Set<String> = Set<String>()
     public var customVariables: Dictionary<String, String> = Dictionary<String, String>()
@@ -85,6 +104,7 @@ public class PianoComposer: NSObject {
     public var contentSection: String = ""
     public var contentIsNative: Bool? = nil
     public var gaClientId: String = ""
+    public var browserId: String = ""
 
     @available(*, deprecated, message: "Use endpoint property")
     public var endpointUrl: String {
@@ -213,6 +233,11 @@ public class PianoComposer: NSObject {
         self.gaClientId = gaClientId
         return self
     }
+    
+    public func browserId(_ browserId: String) -> PianoComposer {
+        self.browserId = browserId
+        return self
+    }
 
     /**
         Start experiences executing
@@ -225,6 +250,15 @@ public class PianoComposer: NSObject {
         }
 
         if let requestUrl = URL(string: "\(getBaseUrl(isExecute: true))\(executeAction)") {
+            PianoComposer.interceptorTypes.forEach { type in
+                do {
+                    interceptors.append(try type.init(composer: self))
+                } catch {
+                    PianoLogger.error(message: error.localizedDescription)
+                    return
+                }
+            }
+            
             var request = URLRequest(url: requestUrl)
             request.httpMethod = "POST"
             request.httpBody = createRequestBody()
@@ -238,9 +272,13 @@ public class PianoComposer: NSObject {
                     UIApplication.shared.isNetworkActivityIndicatorVisible = false
                 }
 
-                self.taskCompleted(data: data, response: response, error: error)
+                let result = self.taskCompleted(data: data, response: response, error: error)
                 DispatchQueue.main.async {
                     self.delegate?.composerExecutionCompleted?(composer: self)
+                }
+                
+                self.interceptors.forEach { interceptor in
+                    interceptor.executed?(composer: self, params: result)
                 }
             })
 
@@ -255,10 +293,10 @@ public class PianoComposer: NSObject {
         return self
     }
 
-    fileprivate func taskCompleted(data: Data?, response: URLResponse?, error: Error?) {
+    fileprivate func taskCompleted(data: Data?, response: URLResponse?, error: Error?) -> [String:Any]? {
         if let error = error {
             PianoLogger.debug(message: error.localizedDescription)
-            return
+            return nil
         }
 
         guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 && data != nil else {
@@ -267,13 +305,13 @@ public class PianoComposer: NSObject {
             if let responseData = data, responseData.count > 0 {
                 PianoLogger.debug(message: "Response data:\n\(String(data: responseData, encoding: .utf8) ?? "")")
             }
-            return
+            return nil
         }
 
         PianoLogger.debug(message: "Response data:\n\(String(data: data!, encoding: .utf8) ?? "")")
         guard let responseObject = JSONSerializationUtil.deserializeResponse(response: response!, responseData: data!) else {
             PianoLogger.debug(message: "Cannot deserialize response")
-            return
+            return nil
         }
 
         if let errors = (responseObject["errors"] as? [Any]){
@@ -286,6 +324,8 @@ public class PianoComposer: NSObject {
                 processExperienceResult(result: ExperienceResult(dict: result))
             }
         }
+        
+        return responseObject
     }
 
     fileprivate func getBaseUrl(isExecute: Bool) -> String {
@@ -338,7 +378,7 @@ public class PianoComposer: NSObject {
                 .add(name: "url", value: url)
                 .add(name: "referer", value: referrer)
                 .add(name: "tags", value: tags.joined(separator: ","))
-                .add(name: "pageview_id", value: ComposerHelper.generatePageViewId())
+                .add(name: "pageview_id", value: pageViewId)
                 .add(name: "visit_id", value: visitTuple.visitId)
                 .add(name: "new_visit", value: "\(visitTuple.isNew)")
                 .add(name: "zone", value: zoneId)
@@ -354,6 +394,10 @@ public class PianoComposer: NSObject {
 
         if customParams != nil {
             requestParamBuilder.add(name: "custom_params", value: JSONSerializationUtil.serializeObjectToJSONString(object: customParams!.toDictionary()))
+        }
+        
+        if !browserId.isEmpty {
+            requestParamBuilder.add(name: "new_bid", value: browserId)
         }
 
         return requestParamBuilder.build().data(using: String.Encoding.utf8)
@@ -431,6 +475,7 @@ public class PianoComposer: NSObject {
                 PianoLogger.debug(message: "EventType \"\(event.eventType)\" has not item in eventTypeMap")
             }
         }
+        delegate = nil
     }
 
     fileprivate func buildTemplateUrl(event: XpEvent, params: ShowTemplateEventParams) -> String {

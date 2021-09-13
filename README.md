@@ -1,6 +1,8 @@
 # Piano SDK for iOS
 Piano SDK includes dynamic frameworks written in Swift.
 
+
+
 - **[PianoComposer](http://cocoapods.org/pods/PianoComposer):** provides access to the mobile composer
 
 [![Version](https://img.shields.io/cocoapods/v/PianoComposer.svg?style=flat)](http://cocoapods.org/pods/PianoComposer)
@@ -12,6 +14,8 @@ Piano SDK includes dynamic frameworks written in Swift.
 [![Version](https://img.shields.io/cocoapods/v/PianoOAuth.svg?style=flat)](http://cocoapods.org/pods/PianoOAuth)
 [![Platform](https://img.shields.io/cocoapods/p/PianoOAuth.svg?style=flat)](http://cocoapods.org/pods/PianoOAuth)
 [![License](https://img.shields.io/cocoapods/l/PianoOAuth.svg?style=flat)](http://cocoapods.org/pods/PianoOAuth)
+
+- **[PianoC1X](C1X.MD):** component for integration Piano Composer with [Cxense](https://github.com/cXense/cxense-spm).
 
 This document details the process of integrating the Piano SDK with your iOS application. If you have any questions, don't hesitate to email us at support@piano.io.
 
@@ -29,8 +33,8 @@ Add the following lines to your `Podfile`.
 ```
 use_frameworks!
 
-pod 'PianoComposer', '~>2.3.12'
-pod 'PianoOAuth', '~>2.3.12'
+pod 'PianoComposer', '~>2.4.0'
+pod 'PianoOAuth', '~>2.4.0'
 ```
 
 Then run `pod install`. For details of the installation and usage of CocoaPods, visit [official web site](https://cocoapods.org/).

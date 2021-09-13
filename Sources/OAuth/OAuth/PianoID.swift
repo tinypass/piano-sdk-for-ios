@@ -355,10 +355,6 @@ public class PianoID: NSObject {
             }
             return
         }
-
-        signInHandler {
-            self.delegate?.pianoID(self, didSignInForToken: token, withError: nil)
-        }
     }
 
     internal func signInFail(_ error: PianoIDError!) {
@@ -367,10 +363,6 @@ public class PianoID: NSObject {
                 self.delegate!.signIn!(result: nil, withError: error)
             }
             return
-        }
-
-        signInHandler {
-            self.delegate?.pianoID(self, didSignInForToken: nil, withError: error)
         }
     }
 
@@ -381,10 +373,6 @@ public class PianoID: NSObject {
             }
             return
         }
-
-        signInHandler {
-            self.delegate?.pianoIDSignInDidCancel(self)
-        }
     }
 
     internal func signOutSuccess() {
@@ -394,10 +382,6 @@ public class PianoID: NSObject {
             }
             return
         }
-
-        DispatchQueue.main.async {
-            self.delegate?.pianoID(self, didSignOutWithError: nil)
-        }
     }
 
     internal func signOutFail() {
@@ -406,10 +390,6 @@ public class PianoID: NSObject {
                 self.delegate!.signOut!(withError: PianoIDError.signOutFailed)
             }
             return
-        }
-
-        DispatchQueue.main.async {
-            self.delegate?.pianoID(self, didSignOutWithError: PianoIDError.signOutFailed)
         }
     }
 

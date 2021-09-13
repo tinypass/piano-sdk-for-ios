@@ -1,6 +1,7 @@
 import Foundation
+import UIKit
 
-@objc public protocol PianoShowTemplateDelegate: class {
+@objc public protocol PianoShowTemplateDelegate: AnyObject {
     
     func findViewBySelector(selector: String) -> UIView?
     

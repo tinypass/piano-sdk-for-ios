@@ -1,5 +1,9 @@
 # Piano SDK for iOS
 
+## v2.4.0
+* [Piano Composer] Added support C1X
+* [Piano ID] Removed deprecated functions
+
 ## v2.3.13
 * [Piano ID] Added email confirmation flag
 * [Piano ID] Fix problems with saved cookies

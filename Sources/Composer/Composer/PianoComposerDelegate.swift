@@ -1,6 +1,6 @@
 import Foundation
 
-@objc public protocol PianoComposerDelegate: class {
+@objc public protocol PianoComposerDelegate: AnyObject {
     /**
      Show login event
      */
