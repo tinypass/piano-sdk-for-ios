@@ -8,7 +8,7 @@ Pod::Spec.new do |s|
   s.author       = 'Piano Inc.'
   s.platform     = :ios, '9.0'
   s.source       = { :git => 'https://github.com/tinypass/piano-sdk-for-ios.git', :tag => "#{s.version}" }
-  s.source_files = 'C1X/C1X/**/*.swift', 'C1X/C1X/**/*.h'
+  s.source_files = 'Sources/C1X/C1X/**/*.swift', 'Sources/C1X/C1X/**/*.h'
   s.static_framework = true
   s.dependency 'PianoComposer', "~> #{s.version}"
   s.dependency 'CxenseSDK', '~> 1.9.5'

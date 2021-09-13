@@ -8,8 +8,8 @@ Pod::Spec.new do |s|
   s.author       = 'Piano Inc.'
   s.platform     = :ios, '9.0'
   s.source       = { :git => 'https://github.com/tinypass/piano-sdk-for-ios.git', :tag => "#{s.version}" }
-  s.resources = "OAuth/OAuth/Resources/*.png"
-  s.source_files = 'Common/*.swift', 'OAuth/OAuth/**/*.swift', 'OAuth/OAuth/**/*.h'
+  s.resources = "Sources/OAuth/OAuth/Resources/*.png"
+  s.source_files = 'Sources/Common/*.swift', 'Sources/OAuth/OAuth/**/*.swift', 'Sources/OAuth/OAuth/**/*.h'
   s.static_framework = true
   s.dependency 'GoogleSignIn', '~> 5.0'
   s.dependency 'FBSDKLoginKit', '~> 9.0'
