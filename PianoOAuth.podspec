@@ -11,6 +11,8 @@ Pod::Spec.new do |s|
   s.resources = "Sources/OAuth/OAuth/Resources/*.png"
   s.source_files = 'Sources/Common/*.swift', 'Sources/OAuth/OAuth/**/*.swift', 'Sources/OAuth/OAuth/**/*.h'
   s.static_framework = true
+  s.pod_target_xcconfig = { 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64' }
+  s.user_target_xcconfig = { 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64' }
   s.dependency 'GoogleSignIn', '~> 5.0'
   s.dependency 'FBSDKLoginKit', '~> 9.0'
 end

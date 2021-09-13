@@ -10,6 +10,8 @@ Pod::Spec.new do |s|
   s.source       = { :git => 'https://github.com/tinypass/piano-sdk-for-ios.git', :tag => "#{s.version}" }
   s.source_files = 'Sources/C1X/C1X/**/*.swift', 'Sources/C1X/C1X/**/*.h'
   s.static_framework = true
+  s.pod_target_xcconfig = { 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64' }
+  s.user_target_xcconfig = { 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64' }
   s.dependency 'PianoComposer', "~> #{s.version}"
   s.dependency 'CxenseSDK', '~> 1.9.5'
 end

@@ -10,4 +10,6 @@ Pod::Spec.new do |s|
   s.source       = { :git => 'https://github.com/tinypass/piano-sdk-for-ios.git', :tag => "#{s.version}" }
   s.resources =  'Sources/Composer/Composer/Resources/*.png'
   s.source_files = 'Sources/Common/*.swift', 'Sources/Composer/Composer/**/*.swift', 'Sources/Composer/Composer/**/*.h'
+  s.pod_target_xcconfig = { 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64' }
+  s.user_target_xcconfig = { 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64' }
 end
