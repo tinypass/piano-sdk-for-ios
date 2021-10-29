@@ -1,8 +1,6 @@
 # Piano SDK for iOS
 Piano SDK includes dynamic frameworks written in Swift.
 
-
-
 - **[PianoComposer](http://cocoapods.org/pods/PianoComposer):** provides access to the mobile composer
 
 [![Version](https://img.shields.io/cocoapods/v/PianoComposer.svg?style=flat)](http://cocoapods.org/pods/PianoComposer)
@@ -33,8 +31,8 @@ Add the following lines to your `Podfile`.
 ```
 use_frameworks!
 
-pod 'PianoComposer', '~>2.4.0'
-pod 'PianoOAuth', '~>2.4.0'
+pod 'PianoComposer', '~>2.4.1'
+pod 'PianoOAuth', '~>2.4.1'
 ```
 
 Then run `pod install`. For details of the installation and usage of CocoaPods, visit [official web site](https://cocoapods.org/).
@@ -218,7 +216,9 @@ These settings should be configured in Piano ID according to https://docs.piano.
 
 ##### PianoIDDelegate protocol
 ```swift
-func pianoID(_ pianoID: PianoID, didSignInForToken token: PianoIDToken!, withError error: Error!)
-func pianoID(_ pianoID: PianoID, didSignOutWithError error: Error!)
-pianoIDSignInDidCancel(_ pianoID: PianoID)
+func signIn(result: PianoIDSignInResult!, withError error: Error!);
+
+func signOut(withError error: Error!);
+
+func cancel();
 ```
