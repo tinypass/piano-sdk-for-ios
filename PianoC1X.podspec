@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = 'PianoC1X'
-  s.version      = '2.4.0'
+  s.version      = '2.4.1'
   s.swift_version = '5.0'
   s.summary      = 'Enables iOS apps to use C1X integration by Piano.io'
   s.homepage     = 'https://github.com/tinypass/piano-sdk-for-ios'
@@ -13,5 +13,5 @@ Pod::Spec.new do |s|
   s.pod_target_xcconfig = { 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64' }
   s.user_target_xcconfig = { 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64' }
   s.dependency 'PianoComposer', "~> #{s.version}"
-  s.dependency 'CxenseSDK', '~> 1.9.5'
+  s.dependency 'CxenseSDK', '~> 1.9.7'
 end

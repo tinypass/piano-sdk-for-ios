@@ -10,6 +10,11 @@ import Foundation
      Show template event
      */
     @objc optional func showTemplate(composer: PianoComposer, event: XpEvent, params: ShowTemplateEventParams?)
+
+    /**
+     Set response variable event
+     */
+    @objc optional func setResponseVariable(composer: PianoComposer, event: XpEvent, params: SetResponseVariableParams?)
     
     /**
      Non site action event

@@ -3,6 +3,7 @@ import Foundation
 fileprivate enum EventType: Int {
     case showLogin
     case showTemplate
+    case setResponseVariable
     case nonSite
     case userSegmentTrue
     case userSegmentFalse
@@ -70,6 +71,7 @@ public class PianoComposer: NSObject {
 
     fileprivate let eventTypeMap = ["showLogin": EventType.showLogin,
                                     "showTemplate": EventType.showTemplate,
+                                    "setResponseVariable": EventType.setResponseVariable,
                                     "nonSite": EventType.nonSite,
                                     "userSegmentTrue": EventType.userSegmentTrue,
                                     "userSegmentFalse": EventType.userSegmentFalse,
@@ -454,6 +456,8 @@ public class PianoComposer: NSObject {
                         showTemplateEventParams!.trackingId = event.eventExecutionContext?.trackingId ?? ""
                     }
                     delegate?.showTemplate?(composer: self, event: event, params: showTemplateEventParams)
+                case .setResponseVariable:
+                    delegate?.setResponseVariable?(composer: self, event: event, params: SetResponseVariableParams(dict: event.eventParams))
                 case .nonSite:
                     delegate?.nonSite?(composer: self, event: event)
                 case .userSegmentTrue:
@@ -475,7 +479,6 @@ public class PianoComposer: NSObject {
                 PianoLogger.debug(message: "EventType \"\(event.eventType)\" has not item in eventTypeMap")
             }
         }
-        delegate = nil
     }
 
     fileprivate func buildTemplateUrl(event: XpEvent, params: ShowTemplateEventParams) -> String {

@@ -44,6 +44,7 @@
 		0DDFFB651E8BCF34009E7B67 /* ExternalEventService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ExternalEventService.swift; path = ShowTemplate/ExternalEventService.swift; sourceTree = "<group>"; };
 		0DE62FFE1D1D4FEE00FDBF31 /* JSONSerializationUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = JSONSerializationUtil.swift; path = ../Common/JSONSerializationUtil.swift; sourceTree = "<group>"; };
 		0DEF1AEA1D0FEB7200B243E9 /* CustomParams.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CustomParams.swift; path = Models/CustomParams.swift; sourceTree = "<group>"; };
+		E9C7C069277339C000E09FB2 /* SetResponseVariableParams.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SetResponseVariableParams.swift; path = Models/SetResponseVariableParams.swift; sourceTree = "<group>"; };
 		E9D4C9B126B7DD960012CFE6 /* PianoError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PianoError.swift; path = ../Common/PianoError.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -129,6 +130,7 @@
 				0D23D8DD1E95029D003B28B7 /* Meter.swift */,
 				0D9DF3A71D09A2EA0058ED47 /* PageViewMeterEventParams.swift */,
 				0D3FA12920B2C88C003BD31A /* ServerError.swift */,
+				E9C7C069277339C000E09FB2 /* SetResponseVariableParams.swift */,
 				0D9DF3A51D099DA70058ED47 /* ShowLoginEventParams.swift */,
 				0D6214EF1DC7252300E44970 /* ShowTemplateEventParams.swift */,
 				0D24EDAD1D0167D4001BE082 /* SplitTestEntry.swift */,

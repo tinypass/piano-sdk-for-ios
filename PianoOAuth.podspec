@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = 'PianoOAuth'
-  s.version      = '2.4.0'
+  s.version      = '2.4.1'
   s.swift_version = '5.0'
   s.summary      = 'Enables iOS apps to sign in with Piano.io'
   s.homepage     = 'https://github.com/tinypass/piano-sdk-for-ios'
