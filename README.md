@@ -92,6 +92,7 @@ optional func composerExecutionCompleted(composer: PianoComposer)
 // Composer actions from server 
 optional func showLogin(composer: PianoComposer, event: XpEvent, params: ShowLoginEventParams?)
 optional func showTemplate(composer: PianoComposer, event: XpEvent, params: ShowTemplateEventParams?)
+optional func setResponseVariable(composer: PianoComposer, event: XpEvent, params: SetResponseVariableParams?)
 optional func nonSite(composer: PianoComposer, event: XpEvent)
 optional func userSegmentTrue(composer: PianoComposer, event: XpEvent)
 optional func userSegmentFalse(composer: PianoComposer, event: XpEvent)    
