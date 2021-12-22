@@ -1,5 +1,10 @@
 # Piano SDK for iOS
 
+## v2.4.1
+* [PianoComposer] Fixed calling composerExecutionCompleted method for PianoComposerDelegate
+* [PianoComposer] Added support "Set response variable"
+* [PianoC1X] Cxense SDK updated to v1.9.7
+
 ## v2.4.0
 * [Piano Composer] Added support C1X
 * [Piano ID] Removed deprecated functions
