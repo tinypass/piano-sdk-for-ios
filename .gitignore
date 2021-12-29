@@ -64,3 +64,10 @@ fastlane/report.xml
 fastlane/Preview.html
 fastlane/screenshots
 fastlane/test_output
+
+.idea
+
+Samples/PianoMobile/PianoMobile.xcworkspace
+Samples/PianoMobile/PianoMobile.xcodeproj/project.xcworkspace
+Samples/PianoMobile/Podfile.lock
+Samples/PianoMobile/Pods
