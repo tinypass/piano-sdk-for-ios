@@ -121,27 +121,6 @@ import PianoOAuth
 
 ```
 
-#### Piano accounts user provider
-##### Usage
-```swift
-let vc = PianoOAuthPopupViewController(aid: "<PUBLISHER_AID>") // for piano accounts user provider
-...
-vc.delegate = someDelegate // conform PianoOAuthDelegate protocol
-vc.signUpEnabled = true // makes "sign up" button enabled (default: false)
-vc.widgetType = .login // widget type (possible values: ".login", ".register")
-vc.showPopup()
-```
-##### PianoOAuthDelegate protocol
-```swift
-func loginSucceeded(accessToken: String)
-func loginCancelled() 
-```
-
-##### Screenshots
-<img src="./Images/oauth_iphone.png" alt="iPhone example" width="200"/>
-<img src="./Images/oauth_ipad.png" alt="iPad example" width="446"/>
-
-
 #### Piano ID user provider
 
 ##### Piano ID
@@ -222,4 +201,20 @@ func signIn(result: PianoIDSignInResult!, withError error: Error!);
 func signOut(withError error: Error!);
 
 func cancel();
+```
+
+#### Piano accounts user provider **(deprecated)**
+##### Usage
+```swift
+let vc = PianoOAuthPopupViewController(aid: "<PUBLISHER_AID>") // for piano accounts user provider
+...
+vc.delegate = someDelegate // conform PianoOAuthDelegate protocol
+vc.signUpEnabled = true // makes "sign up" button enabled (default: false)
+vc.widgetType = .login // widget type (possible values: ".login", ".register")
+vc.showPopup()
+```
+##### PianoOAuthDelegate protocol
+```swift
+func loginSucceeded(accessToken: String)
+func loginCancelled() 
 ```
