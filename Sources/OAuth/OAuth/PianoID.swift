@@ -371,7 +371,8 @@ public class PianoID: NSObject {
             signInHandler {
                 self.delegate!.cancel!()
             }
-            return
+        } else if let vc = self.authViewController, let presentingViewController = vc.presentingViewController {
+            presentingViewController.dismiss(animated: true)
         }
     }
 

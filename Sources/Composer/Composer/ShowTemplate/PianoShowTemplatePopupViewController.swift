@@ -52,9 +52,7 @@ public class PianoShowTemplatePopupViewController: BasePopupViewController {
                                                                   y: (view.frame.height - indicatorSize) / 2,
                                                                   width: indicatorSize,
                                                                   height: indicatorSize))
-        activityIndicator.autoresizingMask = [.flexibleLeftMargin, .flexibleTopMargin, .flexibleBottomMargin, .flexibleRightMargin]
-        activityIndicator.layer.cornerRadius = 4
-        activityIndicator.backgroundColor = blueColor
+        activityIndicator.color = blueColor
         
         view.addSubview(webView)
         view.addSubview(activityIndicator)

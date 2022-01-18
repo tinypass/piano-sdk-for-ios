@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = 'PianoC1X'
-  s.version      = '2.4.1'
+  s.version      = '2.4.2'
   s.swift_version = '5.0'
   s.summary      = 'Enables iOS apps to use C1X integration by Piano.io'
   s.homepage     = 'https://github.com/tinypass/piano-sdk-for-ios'

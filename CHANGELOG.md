@@ -1,5 +1,9 @@
 # Piano SDK for iOS
 
+## v2.4.2
+* [PianoComposer] Fixed activity indicator
+* [PianoOAuth] Fixed cancel handler
+
 ## v2.4.1
 * [PianoComposer] Fixed calling composerExecutionCompleted method for PianoComposerDelegate
 * [PianoComposer] Added support "Set response variable"
