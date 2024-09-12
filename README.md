@@ -1,4 +1,7 @@
-# Piano SDK for iOS
+# Piano SDK for iOS (DEPRECATED)
+
+## !!! The project has been moved to another [repository](https://gitlab.com/piano-public/sdk/ios/package)
+
 Piano SDK includes dynamic frameworks written in Swift.
 
 - **[PianoComposer](http://cocoapods.org/pods/PianoComposer):** provides access to the mobile composer
